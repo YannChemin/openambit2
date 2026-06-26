@@ -1,0 +1,3 @@
+usr/lib/*/libambit.so.*
+usr/lib/*/libmovescount.so.*
+lib/udev/rules.d/libambit.rules

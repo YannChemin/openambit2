@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfirmBetaDialog</class>
+ <widget class="QDialog" name="ConfirmBetaDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>558</width>
+    <height>498</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Openambit: Disclaimer</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icon_disconnected</normaloff>:/icon_disconnected</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QCheckBox" name="skipBetaCheck">
+     <property name="text">
+      <string>Don't ask me again, I really want to use Openambit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="html">
+      <string><![CDATA[<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html><head><meta name="qrichtext" content="1" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">EARLY BETA SOFTWARE: <a href="http://en.wikipedia.org/wiki/Here_be_dragons"><span style=" text-decoration: underline; color:#0000ff;">here be dragons</span></a></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">This software is in early beta stage, it might upload invalid logs to movescount that cannot be overwritten, and do other bizarre things.</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" color:#008000;">Openambit</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">is</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">free</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">software:</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">you</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">can</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">redistribute</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">it</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">and/or</span><span style=" color:#c0c0c0;"> </span><span style=" color:#008000;">modify </span><span style=" font-family:'Courier New,courier'; color:#008000;">it</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">under</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">terms</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">of</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">GNU</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">General</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">Public</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">License</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">as</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">published</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">by the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">Free</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">Software</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">Foundation,</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">either</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">version</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">3</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">of</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">License,</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">or</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">(at</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">your</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">option)</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">any</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">later</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">version.</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier';"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Courier New,courier'; color:#008000;">This</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">program</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">is</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">distributed</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">in</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">hope</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">that</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">it</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">will</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">be</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">useful, but</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">WITHOUT</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">ANY</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">WARRANTY;</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">without</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">even</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">implied</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">warranty</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">of</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">MERCHANTABILITY</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">or</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">FITNESS</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">FOR</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">A</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">PARTICULAR</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">PURPOSE.</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">See</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">the GNU</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">General</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">Public</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">License</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">for</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">more</span><span style=" font-family:'Courier New,courier'; color:#c0c0c0;"> </span><span style=" font-family:'Courier New,courier'; color:#008000;">details.</span></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Please use this software at <span style=" text-decoration: underline;">your own</span> risk and only if you understand the risks involved.</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">If you decide to use Openambit please consider <a href="https://github.com/openambitproject/openambit/issues"><span style=" text-decoration: underline; color:#0000ff;">reporting bugs</span></a> so we can make it better.</p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><br /></p>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Thanks </p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier'; color:#008000;"><br /></p>
+<p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Courier New,courier'; color:#008000;"><br /></p></body></html> 
+      ]]></string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ConfirmBetaDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ConfirmBetaDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

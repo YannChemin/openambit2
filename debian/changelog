@@ -1,0 +1,14 @@
+openambit (0.5-1) trixie; urgency=medium
+
+  * Offline GPS orbit from IGS / Geoscience Australia (RINEX→UBX converter)
+  * GPS Orbit settings page in preferences dialog
+  * Watch status dashboard: firmware version and orbit cache age
+  * Movescount network replaced with open data sources
+
+ -- Yann Chemin <dr.yann.chemin@gmail.com>  Thu, 26 Jun 2026 00:00:00 +0000
+
+openambit (0.4-1) unstable; urgency=low
+
+  * Initial Debian packaging
+
+ -- Yann Chemin <dr.yann.chemin@gmail.com>  Thu, 01 Jan 2026 00:00:00 +0000

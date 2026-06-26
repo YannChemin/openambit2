@@ -1,0 +1,7 @@
+usr/bin/openambit
+usr/bin/openambit-cli
+usr/bin/openambit-routes
+usr/share/applications/openambit.desktop
+usr/share/appdata/openambit.appdata.xml
+usr/share/icons/hicolor/64x64/apps/openambit.png
+usr/share/openambit/map.html

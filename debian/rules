@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+
+# Debian rules file for openambit (debhelper 13 / cmake)
+
+export DH_VERBOSE = 1
+
+# openambit-routes lacks an explicit CMake dependency on libmovescount, so
+# parallel linking races. Restrict to sequential to avoid the race.
+export DEB_BUILD_OPTIONS = noparallel
+
+%:
+	dh $@ --buildsystem=cmake
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DBUILD_EXTRAS=OFF \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib/$(DEB_HOST_MULTIARCH) \
+		-DCMAKE_INSTALL_UDEVRULESDIR=/lib/udev/rules.d
+
+# Udev rules must be owned by root – strip install-time DESTDIR prefix
+override_dh_install:
+	dh_install
+	# Ensure udev rule has correct permissions
+	chmod 0644 debian/openambit/lib/udev/rules.d/*.rules 2>/dev/null || true

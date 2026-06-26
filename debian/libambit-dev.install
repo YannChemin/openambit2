@@ -1,0 +1,4 @@
+usr/lib/*/libambit.so
+usr/lib/*/libmovescount.so
+usr/include/libambit.h
+usr/include/movescount/*.h

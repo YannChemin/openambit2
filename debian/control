@@ -1,0 +1,46 @@
+Source: openambit
+Section: utils
+Priority: optional
+Maintainer: Yann Chemin <dr.yann.chemin@gmail.com>
+Build-Depends: debhelper-compat (= 13),
+               cmake (>= 3.0),
+               qtbase5-dev,
+               qt5-qmake,
+               qttools5-dev,
+               qttools5-dev-tools,
+               libhidapi-dev,
+               libudev-dev,
+               libqt5network5t64 | libqt5network5
+Standards-Version: 4.6.2
+Homepage: https://github.com/openambit/openambit
+Vcs-Git: https://github.com/openambit/openambit.git
+Vcs-Browser: https://github.com/openambit/openambit
+Rules-Requires-Root: no
+
+Package: openambit
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libambit0 (= ${binary:Version})
+Description: Desktop application for Suunto Ambit GPS watches
+ OpenAmbit allows you to synchronize data from your Suunto Ambit GPS
+ watch to your computer. It supports reading exercise logs, updating
+ GPS orbit data (using the open IGS / Geoscience Australia source),
+ editing sport mode settings and viewing watch status.
+ .
+ This package contains the desktop GUI application.
+
+Package: libambit0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library for communicating with Suunto Ambit GPS watches
+ libambit provides USB HID communication with Suunto Ambit GPS watches,
+ supporting log retrieval, GPS orbit upload, sport mode configuration,
+ and device information queries.
+
+Package: libambit-dev
+Architecture: any
+Depends: libambit0 (= ${binary:Version}), ${misc:Depends}
+Description: Development files for libambit
+ Header files and static library for building applications that
+ communicate with Suunto Ambit GPS watches using libambit.

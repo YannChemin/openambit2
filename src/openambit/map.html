@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    html,body,#map { margin:0; padding:0; width:100%; height:100%; background:#1e1e2e; }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<div id="map"></div>
+<script>
+// Default center: Plumergat, Bretagne, France — overridden by setView() or restoreView()
+var map = L.map('map').setView([47.817, -2.817], 10);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19
+}).addTo(map);
+
+var layers = {};
+var layerLoaded = {};
+
+function loadGeoJSON(id, data, color) {
+  if (layers[id]) { map.removeLayer(layers[id]); }
+  var parsed = JSON.parse(data);
+  layers[id] = L.geoJSON(parsed, {
+    style: function(f) {
+      return { color: color || '#3584e4', weight: 3, opacity: 0.85 };
+    },
+    pointToLayer: function(f, ll) {
+      return L.circleMarker(ll, { radius: 6, color: color || '#f5a623',
+        fillColor: color || '#f5a623', fillOpacity: 0.9, weight: 2 });
+    },
+    onEachFeature: function(f, layer) {
+      if (f.properties) {
+        var popup = '';
+        if (f.properties.name) popup += '<b>' + f.properties.name + '</b><br>';
+        if (f.properties.activity) popup += f.properties.activity + '<br>';
+        if (f.properties.distance_m) popup += 'Distance: ' + (f.properties.distance_m/1000).toFixed(2) + ' km<br>';
+        if (f.properties.duration_s) popup += 'Duration: ' + Math.floor(f.properties.duration_s/60) + ' min';
+        if (popup) layer.bindPopup(popup);
+      }
+    }
+  }).addTo(map);
+  layerLoaded[id] = true;
+}
+
+function showLayer(id, visible) {
+  if (!layers[id]) return;
+  if (visible) { map.addLayer(layers[id]); }
+  else { map.removeLayer(layers[id]); }
+}
+
+function clearLayer(id) {
+  if (layers[id]) { map.removeLayer(layers[id]); delete layers[id]; delete layerLoaded[id]; }
+}
+
+function fitAll() {
+  var bounds = null;
+  Object.values(layers).forEach(function(l) {
+    try { var b = l.getBounds(); bounds = bounds ? bounds.extend(b) : b; } catch(e) {}
+  });
+  if (bounds && bounds.isValid()) { map.fitBounds(bounds, { padding: [20, 20] }); }
+}
+
+// Called from C++ to restore the last-saved view (lat, lon, zoom)
+function restoreView(lat, lon, zoom) {
+  map.setView([lat, lon], zoom);
+}
+
+// Called from C++ to jump to the default home location (no saved GeoJSON yet)
+function setHomeView(lat, lon, zoom) {
+  map.setView([lat, lon], zoom);
+}
+
+// Notify C++ of every view change so it can persist the state
+map.on('moveend zoomend', function() {
+  var c = map.getCenter();
+  var z = map.getZoom();
+  // Bridge: window title carries the state so Qt can read it via titleChanged
+  // Format: __mapview__lat,lon,zoom
+  document.title = '__mapview__' + c.lat.toFixed(6) + ',' + c.lng.toFixed(6) + ',' + z;
+});
+</script>
+</body>
+</html>
