@@ -669,10 +669,25 @@ int libambit_gps_orbit_header_read(ambit_object_t *object, uint8_t data[8]);
 int libambit_gps_orbit_write(ambit_object_t *object, uint8_t *data, size_t datalen);
 
 /**
+ * Check a sport mode device settings object for duplicate IDs before it is
+ * sent over USB. sport_mode_id and sport_mode_group_id are written verbatim
+ * into the watch's on-device records with no uniqueness enforcement by the
+ * device/protocol itself, so a duplicate here would silently corrupt/overwrite
+ * sport modes on the watch. Callers should not rely on this alone (fix the
+ * data at the source instead), but libambit_sport_mode_write() calls this
+ * internally as a last line of defense before any USB I/O happens.
+ * \param ambit_sport_modes settings object to validate
+ * \return 0 if no duplicate IDs were found, else -1
+ */
+int libambit_sport_mode_validate(const ambit_sport_mode_device_settings_t *ambit_sport_modes);
+
+/**
  * Write Custom mode displays
  * \param object Object to get settings from
  * \param ambit_sport_modes settings object to be written
- * \return 0 on success, else -1
+ * \return 0 on success, -1 on transport/driver failure, -2 if
+ *         ambit_sport_modes failed libambit_sport_mode_validate() (nothing
+ *         was sent to the device in that case)
  */
 int libambit_sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_sport_modes);
 

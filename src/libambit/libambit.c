@@ -270,9 +270,47 @@ int libambit_gps_orbit_write(ambit_object_t *object, uint8_t *data, size_t datal
     return ret;
 }
 
+int libambit_sport_mode_validate(const ambit_sport_mode_device_settings_t *ambit_sport_modes)
+{
+    uint32_t i, j;
+
+    if (ambit_sport_modes == NULL) {
+        return 0;
+    }
+
+    for (i = 0; i < ambit_sport_modes->sport_modes_count; i++) {
+        for (j = i + 1; j < ambit_sport_modes->sport_modes_count; j++) {
+            if (ambit_sport_modes->sport_modes[i].settings.sport_mode_id ==
+                ambit_sport_modes->sport_modes[j].settings.sport_mode_id) {
+                LOG_ERROR("Duplicate sport_mode_id %u at indexes %u and %u",
+                          ambit_sport_modes->sport_modes[i].settings.sport_mode_id, i, j);
+                return -1;
+            }
+        }
+    }
+
+    for (i = 0; i < ambit_sport_modes->sport_mode_groups_count; i++) {
+        for (j = i + 1; j < ambit_sport_modes->sport_mode_groups_count; j++) {
+            if (ambit_sport_modes->sport_mode_groups[i].sport_mode_group_id ==
+                ambit_sport_modes->sport_mode_groups[j].sport_mode_group_id) {
+                LOG_ERROR("Duplicate sport_mode_group_id %u at indexes %u and %u",
+                          ambit_sport_modes->sport_mode_groups[i].sport_mode_group_id, i, j);
+                return -1;
+            }
+        }
+    }
+
+    return 0;
+}
+
 int libambit_sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_sport_modes)
 {
     int ret = -1;
+
+    if (libambit_sport_mode_validate(ambit_sport_modes) != 0) {
+        LOG_ERROR("Refusing to write sport modes to device: duplicate ID(s) found");
+        return -2;
+    }
 
     if (object->driver != NULL && object->driver->sport_mode_write != NULL) {
         ret = object->driver->sport_mode_write(object, ambit_sport_modes);
