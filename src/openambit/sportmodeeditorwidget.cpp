@@ -194,9 +194,31 @@ void SportModeEditorWidget::saveCurrentForm()
 {
     if (m_currentRow < 0 || m_currentRow >= m_modes.size()) return;
     QVariantMap &m = m_modes[m_currentRow];
+
+    int newId = m_sportModeId->value();
+    int oldId = m.value("CustomModeID", 0).toInt();
+    if (newId != oldId) {
+        bool duplicate = false;
+        for (int i = 0; i < m_modes.size(); ++i) {
+            if (i != m_currentRow && m_modes[i].value("CustomModeID", 0).toInt() == newId) {
+                duplicate = true;
+                break;
+            }
+        }
+        if (duplicate) {
+            QMessageBox::warning(this, tr("Duplicate Sport Mode ID"),
+                tr("Sport Mode ID %1 is already used by another mode.\n"
+                   "Keeping the previous ID (%2).").arg(newId).arg(oldId));
+            newId = oldId;
+            m_loading = true;
+            m_sportModeId->setValue(oldId);
+            m_loading = false;
+        }
+    }
+
     m["Name"]              = m_name->text();
     m["ActivityID"]        = m_activityId->value();
-    m["CustomModeID"]      = m_sportModeId->value();
+    m["CustomModeID"]      = newId;
     m["GPSInterval"]       = m_gpsInterval->currentData().toInt();
     m["RecordingInterval"] = m_recInterval->currentData().toInt();
     m["AltiBaroMode"]      = m_altiBaroMode->currentData().toInt();
@@ -284,9 +306,13 @@ void SportModeEditorWidget::onAddMode()
     if (m_currentRow >= 0 && m_currentRow < m_modes.size())
         saveCurrentForm();
 
+    int nextId = 1;
+    for (const QVariantMap &m : m_modes)
+        nextId = qMax(nextId, m.value("CustomModeID", 0).toInt() + 1);
+
     QVariantMap nm = SportModeStorage::factoryDefaults().first();
     nm["Name"]         = tr("New Mode");
-    nm["CustomModeID"] = m_modes.size();
+    nm["CustomModeID"] = nextId;
     m_modes.append(nm);
 
     m_loading = true;
