@@ -366,7 +366,7 @@ void WorkoutEditorDialog::onGenerateSource()
     map.insert(Workout::NAME, m_workoutName->text());
     QVariantList stepMaps;
     for (const WorkoutStep &step : m_steps) {
-        stepMaps.append(stepToMap(step));
+        stepMaps.append(step.toMap());
     }
     map.insert(Workout::STEPS, stepMaps);
     Workout workout(map);
@@ -417,38 +417,3 @@ void WorkoutEditorDialog::onSaveCompiledApp()
     file.close();
 }
 
-QVariantMap WorkoutEditorDialog::stepToMap(const WorkoutStep &step) const
-{
-    QVariantMap type;
-    type.insert(WorkoutStepType::TYPE_NAME, step.type.typeName);
-    if (step.type.value) {
-        type.insert(WorkoutStepType::VALUE, step.type.value);
-    }
-
-    QVariantMap duration;
-    duration.insert(WorkoutStepDuration::DURATION_NAME, step.duration.durationName);
-    duration.insert(WorkoutStepDuration::VALUE, step.duration.value);
-
-    QVariantMap target;
-    target.insert(WorkoutStepTarget::TARGET_NAME, step.target.targetName);
-    if (step.target.targetName != "none") {
-        QVariantMap range;
-        range.insert(WorkoutStepTarget::MIN, step.target.rangeMin);
-        range.insert(WorkoutStepTarget::MAX, step.target.rangeMax);
-        target.insert(WorkoutStepTarget::VALUE_RANGE, range);
-    }
-
-    QVariantMap notify;
-    notify.insert(WorkoutStepNotify::BEEP, step.notify.beep);
-    notify.insert(WorkoutStepNotify::LIGHT, step.notify.light);
-
-    QVariantMap map;
-    map.insert(WorkoutStep::TYPE, type);
-    map.insert(WorkoutStep::DURATION, duration);
-    map.insert(WorkoutStep::TARGET, target);
-    map.insert(WorkoutStep::NOTIFY, notify);
-    if (!step.text.isEmpty()) {
-        map.insert(WorkoutStep::TEXT, step.text);
-    }
-    return map;
-}

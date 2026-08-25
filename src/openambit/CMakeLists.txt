@@ -55,6 +55,8 @@ set(openambit_HDRS
   sportmodestorage.h
   udevlistener.h
   workouteditordialog.h
+  trainingplanstorage.h
+  trainingplandialog.h
 )
 
 set(openambit_SRCS
@@ -73,6 +75,8 @@ set(openambit_SRCS
   sportmodestorage.cpp
   udevlistener.cpp
   workouteditordialog.cpp
+  trainingplanstorage.cpp
+  trainingplandialog.cpp
 )
 
 set(openambit_UIS

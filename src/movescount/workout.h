@@ -48,6 +48,7 @@ class WorkoutStepDuration
 {
 public:
     explicit WorkoutStepDuration(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString DURATION_NAME;
     static const QString VALUE;
@@ -60,6 +61,7 @@ class WorkoutStepTarget
 {
 public:
     explicit WorkoutStepTarget(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString TARGET_NAME;
     static const QString VALUE_RANGE;
@@ -75,6 +77,7 @@ class WorkoutStepNotify
 {
 public:
     explicit WorkoutStepNotify(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString BEEP;
     static const QString LIGHT;
@@ -87,6 +90,7 @@ class WorkoutStepType
 {
 public:
     explicit WorkoutStepType(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString TYPE_NAME;
     static const QString VALUE;
@@ -99,6 +103,7 @@ class WorkoutStep
 {
 public:
     explicit WorkoutStep(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString TYPE;
     static const QString DURATION;
@@ -117,6 +122,7 @@ class Workout
 {
 public:
     explicit Workout(const QVariantMap &map = QVariantMap());
+    QVariantMap toMap() const;
 
     static const QString NAME;
     static const QString STEPS;

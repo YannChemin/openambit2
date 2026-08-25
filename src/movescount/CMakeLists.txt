@@ -50,6 +50,7 @@ add_library(
   sportmode.cpp
   sportmodegroup.cpp
   workout.cpp
+  trainingplan.cpp
   movescountsettings.cpp
   logentry.cpp
   logstore.cpp

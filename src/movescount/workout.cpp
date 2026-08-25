@@ -14,6 +14,14 @@ WorkoutStepDuration::WorkoutStepDuration(const QVariantMap &map)
     value = map.value(VALUE, 0).toInt();
 }
 
+QVariantMap WorkoutStepDuration::toMap() const
+{
+    QVariantMap map;
+    map.insert(DURATION_NAME, durationName);
+    map.insert(VALUE, value);
+    return map;
+}
+
 const QString WorkoutStepTarget::TARGET_NAME = "targetName";
 const QString WorkoutStepTarget::VALUE_RANGE = "valueRange";
 const QString WorkoutStepTarget::MIN = "min";
@@ -29,6 +37,19 @@ WorkoutStepTarget::WorkoutStepTarget(const QVariantMap &map)
     rangeMax = range.value(MAX, 0).toInt();
 }
 
+QVariantMap WorkoutStepTarget::toMap() const
+{
+    QVariantMap map;
+    map.insert(TARGET_NAME, targetName);
+    if (targetName != "none") {
+        QVariantMap range;
+        range.insert(MIN, rangeMin);
+        range.insert(MAX, rangeMax);
+        map.insert(VALUE_RANGE, range);
+    }
+    return map;
+}
+
 const QString WorkoutStepNotify::BEEP = "beep";
 const QString WorkoutStepNotify::LIGHT = "light";
 
@@ -36,6 +57,14 @@ WorkoutStepNotify::WorkoutStepNotify(const QVariantMap &map)
 {
     beep = map.value(BEEP, true).toBool();
     light = map.value(LIGHT, true).toBool();
+}
+
+QVariantMap WorkoutStepNotify::toMap() const
+{
+    QVariantMap map;
+    map.insert(BEEP, beep);
+    map.insert(LIGHT, light);
+    return map;
 }
 
 const QString WorkoutStepType::TYPE_NAME = "typeName";
@@ -47,6 +76,16 @@ WorkoutStepType::WorkoutStepType(const QVariantMap &map)
         typeName = map[TYPE_NAME].toString();
     }
     value = map.value(VALUE, 0).toInt();
+}
+
+QVariantMap WorkoutStepType::toMap() const
+{
+    QVariantMap map;
+    map.insert(TYPE_NAME, typeName);
+    if (value) {
+        map.insert(VALUE, value);
+    }
+    return map;
 }
 
 const QString WorkoutStep::TYPE = "type";
@@ -64,6 +103,19 @@ WorkoutStep::WorkoutStep(const QVariantMap &map) :
     text = map.value(TEXT).toString();
 }
 
+QVariantMap WorkoutStep::toMap() const
+{
+    QVariantMap map;
+    map.insert(TYPE, type.toMap());
+    map.insert(DURATION, duration.toMap());
+    map.insert(TARGET, target.toMap());
+    map.insert(NOTIFY, notify.toMap());
+    if (!text.isEmpty()) {
+        map.insert(TEXT, text);
+    }
+    return map;
+}
+
 const QString Workout::NAME = "name";
 const QString Workout::STEPS = "steps";
 
@@ -75,6 +127,18 @@ Workout::Workout(const QVariantMap &map)
     for (const QVariant &stepVariant : map.value(STEPS).toList()) {
         steps.append(WorkoutStep(stepVariant.toMap()));
     }
+}
+
+QVariantMap Workout::toMap() const
+{
+    QVariantMap map;
+    map.insert(NAME, name);
+    QVariantList stepMaps;
+    for (const WorkoutStep &step : steps) {
+        stepMaps.append(step.toMap());
+    }
+    map.insert(STEPS, stepMaps);
+    return map;
 }
 
 /* --------------------------------------------------------------------------------------- */
