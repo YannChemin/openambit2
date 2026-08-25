@@ -262,6 +262,14 @@ void MainWindow::showWorkoutBuilder()
     dialog->show();
 }
 
+void MainWindow::showTrainingPlanBuilder()
+{
+    TrainingPlanDialog *dialog = new TrainingPlanDialog(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose);
+    dialog->setModal(false);
+    dialog->show();
+}
+
 void MainWindow::onWriteSportModesToWatch(const QList<QVariantMap> &modes)
 {
     SportModeStorage::save(modes);

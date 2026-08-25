@@ -28,6 +28,7 @@
 #include "geojsonexporter.h"
 #include "sportmodeeditorwidget.h"
 #include "workouteditordialog.h"
+#include "trainingplandialog.h"
 #include <movescount/deviceinfo.h>
 #include <movescount/movescount.h>
 #include <QMainWindow>
@@ -77,6 +78,7 @@ private slots:
     void showReportBug();
     void showAbout();
     void showWorkoutBuilder();
+    void showTrainingPlanBuilder();
     void settingsSaved();
 
     void syncNowClicked();

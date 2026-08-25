@@ -405,6 +405,7 @@
      <string>&amp;Tools</string>
     </property>
     <addaction name="actionWorkoutBuilder"/>
+    <addaction name="actionTrainingPlanBuilder"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -466,6 +467,14 @@
    </property>
    <property name="toolTip">
     <string>Build a structured workout and generate App Zone source (experimental)</string>
+   </property>
+  </action>
+  <action name="actionTrainingPlanBuilder">
+   <property name="text">
+    <string>&amp;Training Plan Builder...</string>
+   </property>
+   <property name="toolTip">
+    <string>Schedule workouts on calendar dates as date-gated App Zone apps (experimental)</string>
    </property>
   </action>
  </widget>
