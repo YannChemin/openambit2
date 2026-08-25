@@ -39,6 +39,7 @@ add_library (
   utils.c
   sport_mode_serialize.c
   custom_modes_bxml.c
+  apps_directory.c
   ${HIDAPI_SOURCE_FILES}
 )
 

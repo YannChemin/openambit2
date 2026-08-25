@@ -29,6 +29,7 @@
 #include "sbem0102.h"
 #include "sport_mode_serialize.h"
 #include "custom_modes_bxml.h"
+#include "apps_directory.h"
 #include "utils.h"
 #include "debug.h"
 
@@ -947,12 +948,47 @@ static int sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_sett
  * \param ambit_apps App rule binaries to serialize and write.
  * \return 0 on success, negative on failure.
  */
+/**
+ * Finds an existing directory entry whose binary is byte-identical to (\a binary, \a
+ * binary_length). Binary content is the only stable identity apps_directory.h's real format
+ * offers - see app_data_write()'s own doc comment for why.
+ */
+static int find_matching_apps_entry_by_binary(const ambit_apps_dir_region_t *region, const uint8_t *binary, uint32_t binary_length)
+{
+    int i;
+    for (i = 0; i < region->entries_count; i++) {
+        if (region->entries[i].binary_length == binary_length &&
+            memcmp(region->entries[i].binary, binary, binary_length) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+/**
+ * Writes App (Suunto Apps / rules) data to an Ambit3-family device, using the real on-device
+ * Apps directory format (apps_directory.h) via a read-modify-write - see sport_mode_write()'s
+ * own doc comment for the parallel CustomModes story; this is the same fix for the Apps
+ * region, closing the gap flagged in this project's training-plans plan (Phase 1's
+ * app_data_write() previously used the older, Ambit1/Ambit2-era serialize_app_data() format,
+ * unverified - and now known-mismatched - against real Ambit3 firmware).
+ *
+ * KNOWN GAP: the legacy ambit_app_rule_t/ambit_sport_mode_device_settings_t API this function
+ * still takes (unchanged, so every existing caller keeps working) has no name or activityId
+ * field per app at all - only an opaque caller-assigned app_id and the raw compiled bytecode.
+ * The real directory format needs both. So an app already present on the device (matched here
+ * by exact binary content, the only stable identity available) keeps its real on-device name/
+ * activityId untouched; a genuinely new app gets a synthesized placeholder name ("App <id>")
+ * and activityId 0, which is what will actually show on the watch until a future API revision
+ * threads real name/activityId through from the GUI/Movescount-JSON layer.
+ */
 static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings, ambit_app_rules_t *ambit_apps)
 {
-    int ret = -1;
-    int dataBufferSize;
-    int dataLen;
-    uint8_t *data;
+    ambit_apps_dir_region_t region;
+    uint8_t *live, *encoded;
+    uint32_t region_size, encoded_len;
+    uint32_t i, j;
+    int ret;
 
     LOG_INFO("Writing App data (Ambit3)");
 
@@ -961,33 +997,95 @@ static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settin
         return -1;
     }
 
-    if (object->driver_data->memory_maps.apps.size == 0) {
+    region_size = object->driver_data->memory_maps.apps.size;
+    if (region_size == 0) {
         LOG_WARNING("Device did not report an Apps memory region");
         return -1;
     }
 
-    dataBufferSize = calculate_size_for_serialize_app_data(ambit_device_settings, ambit_apps);
-    if (dataBufferSize == 0) {
+    if (ambit_device_settings->app_ids_count == 0) {
         return 0;
     }
-    if ((uint32_t)dataBufferSize > object->driver_data->memory_maps.apps.size) {
-        LOG_ERROR("Serialized app data (%d bytes) exceeds Apps region (%u bytes)",
-                   dataBufferSize, object->driver_data->memory_maps.apps.size);
+
+    live = (uint8_t*)malloc(region_size);
+    if (live == NULL) {
+        LOG_ERROR("Could not allocate memory for app_data_write");
         return -1;
     }
 
-    data = (uint8_t*)malloc(dataBufferSize);
-    if (data == NULL) {
-        LOG_INFO("Could not allocate memory for app_data_write");
+    if (libambit_pmem20_flash_read(&object->driver_data->pmem20, object->driver_data->memory_maps.apps.start, region_size, live) != 0) {
+        LOG_ERROR("app_data_write: failed to read current Apps region");
+        free(live);
         return -1;
     }
 
-    dataLen = serialize_app_data(ambit_device_settings, ambit_apps, data);
+    if (ambit_apps_dir_decode(live, region_size, &region) != 0) {
+        LOG_INFO("app_data_write: no valid existing Apps directory found, starting from an empty one");
+        memset(&region, 0, sizeof(region));
+    }
+    free(live);
+
+    for (i = 0; i < ambit_device_settings->app_ids_count; i++) {
+        uint32_t app_id = ambit_device_settings->app_ids[i];
+        int app_rule_index = -1;
+        const uint8_t *binary;
+        uint32_t binary_length;
+        int existing_idx;
+
+        for (j = 0; j < ambit_apps->app_rules_count; j++) {
+            if (ambit_apps->app_rules[j].app_id == app_id) {
+                app_rule_index = (int)j;
+                break;
+            }
+        }
+        if (app_rule_index < 0) {
+            LOG_ERROR("app_data_write: no app rule data found for app_id %u", app_id);
+            return -1;
+        }
+
+        binary = ambit_apps->app_rules[app_rule_index].app_rule_data;
+        binary_length = ambit_apps->app_rules[app_rule_index].app_rule_data_length;
+
+        existing_idx = find_matching_apps_entry_by_binary(&region, binary, binary_length);
+        if (existing_idx >= 0) {
+            LOG_INFO("app_data_write: app_id %u already present on device (matched by content), keeping its existing name/activityId", app_id);
+            continue;
+        }
+
+        if (region.entries_count >= APPS_DIR_MAX_ENTRIES) {
+            LOG_ERROR("app_data_write: no room for app_id %u, Apps directory already has the max %d entries this driver supports",
+                       app_id, APPS_DIR_MAX_ENTRIES);
+            return -1;
+        }
+
+        {
+            ambit_apps_dir_entry_t *entry = &region.entries[region.entries_count];
+            memset(entry, 0, sizeof(*entry));
+            snprintf(entry->name, sizeof(entry->name), "App %u", app_id);
+            entry->activity_id = 0;
+            entry->binary = (uint8_t*)binary;
+            entry->binary_length = binary_length;
+            region.entries_count++;
+        }
+    }
+
+    encoded = (uint8_t*)malloc(region_size);
+    if (encoded == NULL) {
+        LOG_ERROR("Could not allocate memory for app_data_write");
+        return -1;
+    }
+
+    if (ambit_apps_dir_encode(&region, encoded, region_size, &encoded_len) != 0) {
+        LOG_ERROR("app_data_write: encoded Apps directory does not fit in the device's %u-byte region", region_size);
+        free(encoded);
+        return -1;
+    }
+
     ret = libambit_pmem20_data_write_addr(&object->driver_data->pmem20,
                                            object->driver_data->memory_maps.apps.start,
-                                           data, dataLen, true);
+                                           encoded, encoded_len, true);
 
-    free(data);
+    free(encoded);
 
     return ret;
 }
