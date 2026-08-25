@@ -660,6 +660,29 @@ int libambit_personal_settings_get(ambit_object_t *object, ambit_personal_settin
 int libambit_gps_orbit_header_read(ambit_object_t *object, uint8_t data[8]);
 
 /**
+ * One named flash region as reported by the device's own memory map (Ambit3
+ * family only - legacy Ambit/Ambit2 use fixed compile-time offsets and have
+ * no discovery command, so libambit_memory_map_get() returns -1 for them).
+ */
+typedef struct ambit_memory_region_s {
+    char name[32];
+    uint32_t start;
+    uint32_t size;
+} ambit_memory_region_t;
+
+/**
+ * Reads the device's live memory map (region name/start/size for
+ * Waypoints, Routes, Rules, GpsSGEE, CustomModes, TrainingProgram,
+ * ExerciseLog, EventLog, BlePairingInfo, Apps, ...). Triggers the underlying
+ * memory-map command on first call if not already cached.
+ * \param object
+ * \param regions Caller-allocated array to fill
+ * \param max_regions Capacity of `regions`
+ * \return number of regions filled (0..max_regions), or -1 if unsupported/failed
+ */
+int libambit_memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions);
+
+/**
  * Write GPS orbit data
  * \param object Object to get settings from
  * \param data Data to be written
@@ -693,6 +716,36 @@ int libambit_sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_se
 
 
 int libambit_app_data_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_sport_modes, ambit_app_rules_t* ambit_apps);
+
+/**
+ * Read raw bytes back from a flash address (e.g. one reported by the
+ * Ambit3-family memory map, or a fixed legacy PMEM20 offset). Used to verify
+ * a write landed correctly and to inspect regions with no dedicated parser
+ * yet (Apps, CustomModes, TrainingProgram), without needing to look at the
+ * watch's own display.
+ * \param object
+ * \param address Flash start address
+ * \param length Number of bytes to read
+ * \param buffer Caller-allocated buffer of at least `length` bytes
+ * \return 0 on success, else -1
+ */
+int libambit_flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
+
+/**
+ * Writes raw bytes directly to a flash address on the device. Ambit3-family only. This is
+ * a low-level primitive - the caller is responsible for using an address/length that lines
+ * up with a real memory region (see libambit_memory_map_get()) and for the region's own
+ * on-flash structure (e.g. CustomModes' BXml tag tree, see custom_modes_bxml.h) being valid;
+ * an invalid write can make the corresponding watch feature unusable until corrected.
+ * \param object
+ * \param address Flash start address
+ * \param data Bytes to write
+ * \param length Number of bytes in \a data
+ * \param include_sha256_hash Whether to append the SHA256-hash tail command the device
+ *        expects for a hash-validated region write (true for CustomModes/Apps)
+ * \return 0 on success, else -1
+ */
+int libambit_flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash);
 
 /**
  * Callback function for checking if a specific log entry should be read out or

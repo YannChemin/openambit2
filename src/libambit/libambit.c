@@ -336,6 +336,48 @@ int libambit_app_data_write(ambit_object_t *object, ambit_sport_mode_device_sett
     return ret;
 }
 
+int libambit_flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer)
+{
+    int ret = -1;
+
+    if (object->driver != NULL && object->driver->flash_read != NULL) {
+        ret = object->driver->flash_read(object, address, length, buffer);
+    }
+    else {
+        LOG_WARNING("Driver does not support flash_read");
+    }
+
+    return ret;
+}
+
+int libambit_flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash)
+{
+    int ret = -1;
+
+    if (object->driver != NULL && object->driver->flash_write != NULL) {
+        ret = object->driver->flash_write(object, address, data, length, include_sha256_hash);
+    }
+    else {
+        LOG_WARNING("Driver does not support flash_write");
+    }
+
+    return ret;
+}
+
+int libambit_memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions)
+{
+    int ret = -1;
+
+    if (object->driver != NULL && object->driver->memory_map_get != NULL) {
+        ret = object->driver->memory_map_get(object, regions, max_regions);
+    }
+    else {
+        LOG_WARNING("Driver does not support memory_map_get");
+    }
+
+    return ret;
+}
+
 int libambit_log_read(ambit_object_t *object, ambit_log_skip_cb skip_cb, ambit_log_push_cb push_cb, ambit_log_progress_cb progress_cb, void *userref)
 {
     int ret = -1;

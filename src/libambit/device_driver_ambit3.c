@@ -27,6 +27,8 @@
 #include "pmem20.h"
 #include "personal.h"
 #include "sbem0102.h"
+#include "sport_mode_serialize.h"
+#include "custom_modes_bxml.h"
 #include "utils.h"
 #include "debug.h"
 
@@ -108,11 +110,16 @@ static int personal_settings_get(ambit_object_t *object, ambit_personal_settings
 static int log_read(ambit_object_t *object, ambit_log_skip_cb skip_cb, ambit_log_push_cb push_cb, ambit_log_progress_cb progress_cb, void *userref);
 static int gps_orbit_header_read(ambit_object_t *object, uint8_t data[8]);
 static int gps_orbit_write(ambit_object_t *object, uint8_t *data, size_t datalen);
+static int sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings);
+static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings, ambit_app_rules_t *ambit_apps);
 
 static int parse_log_header_block(ambit_object_t *object, libambit_sbem0102_data_t *reply_data_object, ambit_log_skip_cb skip_cb, ambit_log_push_cb push_cb, ambit_log_progress_cb progress_cb, void *userref, uint16_t *log_entries_walked, uint16_t log_entries_total);
 static size_t parse_log_entry(ambit_object_t *object, const uint8_t *log_data, ambit3_log_header_t *log_header);
 static int get_memory_maps(ambit_object_t *object);
 static int log_synced(ambit_object_t *object, ambit_log_entry_t *log_entry);
+static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
+static int flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash);
+static int memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions);
 
 /*
  * Global variables
@@ -129,9 +136,12 @@ ambit_device_driver_t ambit_device_driver_ambit3 = {
     gps_orbit_write,
     NULL, // navigation_read
     NULL, // navigation_write
-    NULL, // sport_mode_write
-    NULL, // app_data_write
-    log_synced
+    sport_mode_write,
+    app_data_write,
+    log_synced,
+    flash_read,
+    flash_write,
+    memory_map_get
 };
 
 
@@ -644,6 +654,414 @@ static int gps_orbit_write(ambit_object_t *object, uint8_t *data, size_t datalen
 }
 
 /**
+ * Writes sport mode (CustomModes) configuration to an Ambit3-family device.
+ *
+ * Unlike the legacy Ambit/Ambit2 driver, Ambit3 does not keep the CustomModes
+ * region at a fixed PMEM20 offset; the address is discovered per-device via
+ * the memory-map command (get_memory_maps()) and the write is validated by
+ * the firmware against a SHA256 hash of the written bytes.
+ *
+ * \param object
+ * \param ambit_device_settings Sport mode settings to serialize and write.
+ * \return 0 on success, negative on failure.
+ */
+/**
+ * Copies a NUL-safe string of up to `max` bytes from `src` into `dst`, which must have
+ * room for max+1 bytes (dst is always left NUL-terminated).
+ */
+static void copy_bounded_name(char *dst, const char *src, size_t max)
+{
+    size_t n = 0;
+    while (n < max && src[n] != '\0') {
+        n++;
+    }
+    memcpy(dst, src, n);
+    dst[n] = '\0';
+}
+
+/**
+ * Maps the legacy (Ambit1/Ambit2-era) per-mode settings scalars onto the real Ambit3
+ * BXml settings block. Field-by-field provenance:
+ *
+ * - name/activity_id/recording_interval/autolap/alti_baro_mode/auto_pause/auto_scroll(ing):
+ *   direct 1:1 renames, both formats store the same value.
+ * - use_hw <- hrbelt_and_pods, gps_power_mode <- gps_interval, hr_high/low <- heartrate_max/min,
+ *   hr_limits_use <- use_heartrate_limits, int_timer_flags <- use_interval_timer,
+ *   int_timer_count <- interval_repetitions: same concept under a renamed field, best-effort
+ *   but high-confidence direct copies.
+ * - interval_slots[5] (Flags/MaxLimit/MinLimit) <- backlight_mode/display_mode/quick_navigation:
+ *   CONFIRMED mapping (not a guess) - this project's custom_modes_bxml.c and the sibling
+ *   sommet project both independently found the watch repurposes the otherwise-unused 6th
+ *   interval-timer slot to carry these three settings.
+ * - interval_slots[0..4] (the actual interval-timer configuration) and auto_start: the
+ *   legacy struct's interval_timer_max/min/unit fields do not have a confirmed mapping onto
+ *   the new slot format's Type/MaxLimit/MinLimit/Len encoding, so they are left at zero
+ *   (interval timer off) here rather than guessed. custom_mode_id is left to the caller
+ *   (see sport_mode_write()): 0 when creating a brand new mode's id, untouched when updating
+ *   an existing one.
+ */
+static void convert_legacy_settings_to_bxml(const ambit_sport_mode_settings_t *legacy, ambit_custom_mode_settings_t *bxml)
+{
+    memset(bxml, 0, sizeof(*bxml));
+    copy_bounded_name(bxml->name, legacy->activity_name, sizeof(legacy->activity_name));
+    bxml->activity_id       = legacy->activity_id;
+    bxml->use_hw             = legacy->hrbelt_and_pods;
+    bxml->alti_baro_mode     = legacy->alti_baro_mode;
+    bxml->gps_power_mode     = legacy->gps_interval;
+    bxml->recording_interval = legacy->recording_interval;
+    bxml->autolap            = legacy->autolap;
+    bxml->hr_high             = legacy->heartrate_max;
+    bxml->hr_low              = legacy->heartrate_min;
+    bxml->hr_limits_use       = legacy->use_heartrate_limits;
+    bxml->auto_pause          = legacy->auto_pause;
+    bxml->auto_scrolling      = legacy->auto_scroll;
+    bxml->int_timer_flags     = legacy->use_interval_timer;
+    bxml->int_timer_count     = legacy->interval_repetitions;
+
+    bxml->interval_slots[5].flags     = (uint8_t)legacy->backlight_mode;
+    bxml->interval_slots[5].max_limit = legacy->display_mode;
+    bxml->interval_slots[5].min_limit = legacy->quick_navigation;
+}
+
+/**
+ * Builds a brand-new BXml display list from the legacy per-mode display array (row1/row2/row3
+ * + views), for use ONLY when a mode has no existing on-device match to preserve displays
+ * from (see sport_mode_write()). EXPERIMENTAL / not hardware-confirmed: real Ambit3 firmware
+ * uses several richer display templates (observed live: 0x0111/0x0122/0x0123/0x0127/0x0150,
+ * fixed system screens present on every real mode) that this legacy-era struct has no concept
+ * of at all, and the exact semantics of the BXml field "Type" value (as opposed to "Index")
+ * are not fully pinned down even in the sibling sommet project's own reverse-engineering notes.
+ * This function reuses the legacy row/view "item" values directly as the new field's Index
+ * (both formats appear to use the same underlying FT_* field-catalogue numbering) and leaves
+ * Type at 0, which is what a 0-shortcut slot commonly shows on real hardware, but this has NOT
+ * been round-trip verified against real firmware the way the rest of custom_modes_bxml.c has.
+ */
+static void convert_legacy_displays_to_bxml(const ambit_sport_mode_t *legacy_mode, ambit_custom_mode_t *bxml_mode)
+{
+    int i;
+
+    bxml_mode->displays_count = 0;
+    for (i = 0; i < legacy_mode->displays_count && bxml_mode->displays_count < CUSTOM_MODES_BXML_MAX_DISPLAYS; i++) {
+        const ambit_sport_mode_display_t *legacy_disp = &legacy_mode->display[i];
+        ambit_custom_mode_display_t *bxml_disp = &bxml_mode->displays[bxml_mode->displays_count];
+        int field_count = 0;
+
+        memset(bxml_disp, 0, sizeof(*bxml_disp));
+        bxml_disp->template_id = legacy_disp->type; /* both formats use the same SINGLE/DOUBLE/TRIPLE/GRAPH_DISPLAY_TYPE numbering */
+        bxml_disp->type = 10; /* observed constant on every real user-editable display of this shape */
+
+        if (field_count < CUSTOM_MODES_BXML_MAX_FIELDS) {
+            bxml_disp->fields[field_count].index = legacy_disp->row1;
+            field_count++;
+        }
+        if (legacy_disp->type != SINGLE_ROW_DISPLAY_TYPE && field_count < CUSTOM_MODES_BXML_MAX_FIELDS) {
+            bxml_disp->fields[field_count].index = legacy_disp->row2;
+            field_count++;
+        }
+        if ((legacy_disp->type == TRIPLE_ROWS_DISPLAY_TYPE || legacy_disp->type == GRAPH_DISPLAY_TYPE) && field_count < CUSTOM_MODES_BXML_MAX_FIELDS) {
+            bxml_disp->fields[field_count].index = legacy_disp->row3;
+            field_count++;
+        }
+        bxml_disp->fields_count = (uint16_t)field_count;
+
+        bxml_mode->displays_count++;
+    }
+}
+
+/**
+ * Finds the index within `region->modes` whose custom_mode_id matches `legacy_id` in its
+ * low 16 bits (the legacy struct only carries a 16-bit sport_mode_id). Returns -1 if none.
+ */
+static int find_matching_bxml_mode(const ambit_custom_modes_region_t *region, uint16_t legacy_id)
+{
+    int i;
+    for (i = 0; i < region->modes_count; i++) {
+        if ((region->modes[i].settings.custom_mode_id & 0xffff) == legacy_id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+/**
+ * Writes sport mode / CustomModes data to an Ambit3-family device.
+ *
+ * Real Ambit3 firmware (confirmed live, 2026-08-25) uses a materially different on-flash
+ * format for CustomModes than the legacy Ambit1/Ambit2 format sport_mode_serialize.c
+ * implements - see custom_modes_bxml.h for the full story and provenance. This function
+ * bridges the old libambit_sport_mode_write() API (still used throughout the GUI/CLI/
+ * Movescount-JSON path, all built around the legacy ambit_sport_mode_device_settings_t
+ * struct) onto that real format via a read-modify-write:
+ *
+ *  1. Read the device's current CustomModes region and decode it.
+ *  2. For each mode the caller supplied: if a mode with the same id already exists on the
+ *     device, update ONLY its settings scalars in place and leave its existing displays/
+ *     rules/app-meta completely untouched - this preserves richer display templates already
+ *     on the watch that the legacy struct has no way to represent (see
+ *     convert_legacy_displays_to_bxml()'s own doc comment). If the mode is genuinely new,
+ *     append it with best-effort (experimental, not hardware-verified) displays built from
+ *     the caller's row/view data.
+ *  3. If the caller supplied sport_mode_groups, rebuild the device's multisport slot list
+ *     from them (matching REPLACE semantics already expected of this API); otherwise leave
+ *     the device's existing multisport slots untouched.
+ *  4. Encode and write the result back, still hash-validated like the pre-BXml write path.
+ */
+static int sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings)
+{
+    ambit_custom_modes_region_t region;
+    uint8_t *live, *encoded;
+    uint32_t region_size, encoded_len;
+    uint32_t max_custom_mode_id;
+    int mode_index_map[64]; /* ambit_device_settings->sport_modes_count is caller-controlled but realistically small */
+    int i, ret;
+
+    LOG_INFO("Writing Custom mode data (Ambit3)");
+
+    if (object->driver_data->memory_maps.initialized == 0 && get_memory_maps(object) != 0) {
+        LOG_WARNING("Failed to read memory map, cannot locate CustomModes region");
+        return -1;
+    }
+
+    region_size = object->driver_data->memory_maps.sport_modes.size;
+    if (region_size == 0) {
+        LOG_WARNING("Device did not report a CustomModes memory region");
+        return -1;
+    }
+
+    if (ambit_device_settings->sport_modes_count > 64) {
+        LOG_ERROR("sport_mode_write: %u sport modes exceeds this function's internal limit of 64", ambit_device_settings->sport_modes_count);
+        return -1;
+    }
+
+    live = (uint8_t*)malloc(region_size);
+    if (live == NULL) {
+        LOG_ERROR("Could not allocate memory for sport_mode_write");
+        return -1;
+    }
+
+    if (libambit_pmem20_flash_read(&object->driver_data->pmem20, object->driver_data->memory_maps.sport_modes.start, region_size, live) != 0) {
+        LOG_ERROR("sport_mode_write: failed to read current CustomModes region");
+        free(live);
+        return -1;
+    }
+
+    if (ambit_custom_modes_decode(live, region_size, &region) != 0) {
+        LOG_ERROR("sport_mode_write: failed to decode current CustomModes region, refusing to write blind");
+        free(live);
+        return -1;
+    }
+    free(live);
+
+    max_custom_mode_id = 0;
+    for (i = 0; i < region.modes_count; i++) {
+        if (region.modes[i].settings.custom_mode_id > max_custom_mode_id) {
+            max_custom_mode_id = region.modes[i].settings.custom_mode_id;
+        }
+    }
+
+    for (i = 0; i < (int)ambit_device_settings->sport_modes_count; i++) {
+        ambit_sport_mode_t *legacy_mode = &ambit_device_settings->sport_modes[i];
+        int existing_idx = find_matching_bxml_mode(&region, legacy_mode->settings.sport_mode_id);
+
+        if (existing_idx >= 0) {
+            uint32_t keep_id = region.modes[existing_idx].settings.custom_mode_id;
+            LOG_INFO("sport_mode_write: updating settings for existing mode \"%s\" (id %u), preserving its displays",
+                      region.modes[existing_idx].settings.name, legacy_mode->settings.sport_mode_id);
+            convert_legacy_settings_to_bxml(&legacy_mode->settings, &region.modes[existing_idx].settings);
+            region.modes[existing_idx].settings.custom_mode_id = keep_id; /* convert_legacy_settings_to_bxml() zeroes the struct first */
+            mode_index_map[i] = existing_idx;
+        } else {
+            if (region.modes_count >= CUSTOM_MODES_BXML_MAX_MODES) {
+                LOG_ERROR("sport_mode_write: no room for new mode \"%s\", CustomModes already has the max %d modes this driver supports",
+                           legacy_mode->settings.activity_name, CUSTOM_MODES_BXML_MAX_MODES);
+                return -1;
+            }
+            LOG_WARNING("sport_mode_write: creating NEW mode \"%s\" with experimental/unverified display data - see convert_legacy_displays_to_bxml()",
+                         legacy_mode->settings.activity_name);
+            int new_idx = region.modes_count;
+            convert_legacy_settings_to_bxml(&legacy_mode->settings, &region.modes[new_idx].settings);
+            max_custom_mode_id++;
+            region.modes[new_idx].settings.custom_mode_id = max_custom_mode_id;
+            convert_legacy_displays_to_bxml(legacy_mode, &region.modes[new_idx]);
+            region.modes[new_idx].rules_count = 0;
+            region.modes[new_idx].has_app_meta = false;
+            region.modes_count++;
+            mode_index_map[i] = new_idx;
+        }
+    }
+
+    if (ambit_device_settings->sport_mode_groups_count > 0) {
+        region.sport_modes_count = 0;
+        for (i = 0; i < (int)ambit_device_settings->sport_mode_groups_count && region.sport_modes_count < CUSTOM_MODES_BXML_MAX_SPORT_MODES; i++) {
+            ambit_sport_mode_group_t *group = &ambit_device_settings->sport_mode_groups[i];
+            ambit_multisport_slot_t *slot = &region.sport_modes[region.sport_modes_count];
+            uint32_t j;
+
+            memset(slot, 0, sizeof(*slot));
+            copy_bounded_name(slot->name, group->activity_name, sizeof(group->activity_name));
+            slot->activity_id = group->activity_id;
+            slot->exercises_count = 0;
+            for (j = 0; j < group->sport_mode_index_count && slot->exercises_count < CUSTOM_MODES_BXML_MAX_EXERCISES; j++) {
+                uint16_t legacy_pos = group->sport_mode_index[j];
+                if (legacy_pos < ambit_device_settings->sport_modes_count) {
+                    slot->exercises[slot->exercises_count++] = (uint16_t)mode_index_map[legacy_pos];
+                } else {
+                    LOG_WARNING("sport_mode_write: group \"%s\" references out-of-range mode position %u, skipping", group->activity_name, legacy_pos);
+                }
+            }
+            region.sport_modes_count++;
+        }
+    }
+
+    encoded = (uint8_t*)malloc(region_size);
+    if (encoded == NULL) {
+        LOG_ERROR("Could not allocate memory for sport_mode_write");
+        return -1;
+    }
+
+    if (ambit_custom_modes_encode(&region, encoded, region_size, &encoded_len) != 0) {
+        LOG_ERROR("sport_mode_write: encoded CustomModes region does not fit in the device's %u-byte region", region_size);
+        free(encoded);
+        return -1;
+    }
+
+    ret = libambit_pmem20_data_write_addr(&object->driver_data->pmem20,
+                                           object->driver_data->memory_maps.sport_modes.start,
+                                           encoded, encoded_len, true);
+
+    free(encoded);
+
+    return ret;
+}
+
+/**
+ * Writes App (Suunto Apps / rules) data to an Ambit3-family device.
+ *
+ * See sport_mode_write() above for why this differs from the legacy driver's
+ * fixed-address version. EXPERIMENTAL: the write is firmware-accepted (the
+ * region hash matches after write), but whether the watch executes a freshly
+ * written app has not been confirmed on real hardware.
+ *
+ * \param object
+ * \param ambit_device_settings Sport mode settings the apps are attached to.
+ * \param ambit_apps App rule binaries to serialize and write.
+ * \return 0 on success, negative on failure.
+ */
+static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings, ambit_app_rules_t *ambit_apps)
+{
+    int ret = -1;
+    int dataBufferSize;
+    int dataLen;
+    uint8_t *data;
+
+    LOG_INFO("Writing App data (Ambit3)");
+
+    if (object->driver_data->memory_maps.initialized == 0 && get_memory_maps(object) != 0) {
+        LOG_WARNING("Failed to read memory map, cannot locate Apps region");
+        return -1;
+    }
+
+    if (object->driver_data->memory_maps.apps.size == 0) {
+        LOG_WARNING("Device did not report an Apps memory region");
+        return -1;
+    }
+
+    dataBufferSize = calculate_size_for_serialize_app_data(ambit_device_settings, ambit_apps);
+    if (dataBufferSize == 0) {
+        return 0;
+    }
+    if ((uint32_t)dataBufferSize > object->driver_data->memory_maps.apps.size) {
+        LOG_ERROR("Serialized app data (%d bytes) exceeds Apps region (%u bytes)",
+                   dataBufferSize, object->driver_data->memory_maps.apps.size);
+        return -1;
+    }
+
+    data = (uint8_t*)malloc(dataBufferSize);
+    if (data == NULL) {
+        LOG_INFO("Could not allocate memory for app_data_write");
+        return -1;
+    }
+
+    dataLen = serialize_app_data(ambit_device_settings, ambit_apps, data);
+    ret = libambit_pmem20_data_write_addr(&object->driver_data->pmem20,
+                                           object->driver_data->memory_maps.apps.start,
+                                           data, dataLen, true);
+
+    free(data);
+
+    return ret;
+}
+
+/**
+ * Reads an arbitrary flash region back from an Ambit3-family device, for
+ * verifying a write (or inspecting Apps/CustomModes/TrainingProgram) without
+ * needing a driver-specific higher-level parser.
+ *
+ * \param object
+ * \param address Flash start address (e.g. from get_memory_maps()).
+ * \param length Number of bytes to read.
+ * \param buffer Caller-allocated buffer of at least `length` bytes.
+ * \return 0 on success, negative on failure.
+ */
+static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer)
+{
+    return libambit_pmem20_flash_read(&object->driver_data->pmem20, address, length, buffer);
+}
+
+/**
+ * Writes raw bytes directly to a flash address. Low-level primitive - see the
+ * libambit_flash_write() doc comment in libambit.h for the caveats (caller owns region
+ * addressing and content validity).
+ */
+static int flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash)
+{
+    return libambit_pmem20_data_write_addr(&object->driver_data->pmem20, address, data, length, include_sha256_hash);
+}
+
+/**
+ * Fills `regions` with the device's live memory map (name/start/size for
+ * every region this driver recognizes), triggering a memory-map read first
+ * if not already cached. Lets callers (diagnostics, test tools) work off the
+ * addresses this specific device/firmware actually reports, instead of
+ * assumed constants.
+ */
+static int memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions)
+{
+    int count = 0;
+    struct { const char *name; memory_map_entry_t *entry; } table[] = {
+        { "Waypoints",       &object->driver_data->memory_maps.waypoints },
+        { "Routes",          &object->driver_data->memory_maps.routes },
+        { "Rules",           &object->driver_data->memory_maps.rules },
+        { "GpsSGEE",         &object->driver_data->memory_maps.gps },
+        { "CustomModes",     &object->driver_data->memory_maps.sport_modes },
+        { "TrainingProgram", &object->driver_data->memory_maps.training_program },
+        { "ExerciseLog",     &object->driver_data->memory_maps.exercise_log },
+        { "EventLog",        &object->driver_data->memory_maps.event_log },
+        { "BlePairingInfo",  &object->driver_data->memory_maps.ble_pairing },
+        { "Apps",            &object->driver_data->memory_maps.apps },
+    };
+    size_t i;
+
+    if (object->driver_data->memory_maps.initialized == 0 && get_memory_maps(object) != 0) {
+        LOG_WARNING("Failed to read memory map");
+        return -1;
+    }
+
+    for (i = 0; i < sizeof(table)/sizeof(table[0]) && count < max_regions; i++) {
+        if (table[i].entry->size == 0) {
+            continue; // Not reported by this device/firmware
+        }
+        strncpy(regions[count].name, table[i].name, sizeof(regions[count].name) - 1);
+        regions[count].name[sizeof(regions[count].name) - 1] = '\0';
+        regions[count].start = table[i].entry->start;
+        regions[count].size = table[i].entry->size;
+        count++;
+    }
+
+    return count;
+}
+
+/**
  * Processes a block of log headers (not gen1).
  *
  * \param object
@@ -901,6 +1319,8 @@ static int get_memory_maps(ambit_object_t *object)
                 mm_entry->start = read32(ptr, 0);
                 ptr += 4;
                 mm_entry->size = read32(ptr, 0);
+
+                LOG_INFO("Memory map entry \"%s\": start=0x%08x size=%u", (char*)libambit_sbem0102_data_ptr(&reply_data_object), mm_entry->start, mm_entry->size);
             }
         }
     }

@@ -38,6 +38,7 @@ add_library (
   sha256.c
   utils.c
   sport_mode_serialize.c
+  custom_modes_bxml.c
   ${HIDAPI_SOURCE_FILES}
 )
 

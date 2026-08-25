@@ -56,6 +56,7 @@ static int gps_orbit_write(ambit_object_t *object, uint8_t *data, size_t datalen
 
 static int sport_mode_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_sport_modes);
 static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settings_t *ambit_device_settings, ambit_app_rules_t* ambit_apps);
+static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
 
 /*
  * Global variables
@@ -75,6 +76,9 @@ ambit_device_driver_t ambit_device_driver_ambit = {
     sport_mode_write,
     app_data_write,
     NULL,
+    flash_read,
+    NULL, // flash_write - not yet implemented for legacy Ambit/Ambit2 (fixed offsets, would reuse libambit_pmem20_data_write_addr like flash_read does)
+    NULL, // memory_map_get - fixed offsets, no discovery command on legacy Ambit/Ambit2
 };
 
 /*
@@ -371,4 +375,9 @@ static int app_data_write(ambit_object_t *object, ambit_sport_mode_device_settin
     }
 
     return ret;
+}
+
+static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer)
+{
+    return libambit_pmem20_flash_read(&object->driver_data->pmem20, address, length, buffer);
 }

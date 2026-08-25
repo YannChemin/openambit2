@@ -51,6 +51,7 @@ set(TEST_SRCS
         libambit/crc16_test.cpp
         libambit/device_support_test.cpp
         libambit/sport_mode_serialize_test.cpp
+        libambit/custom_modes_bxml_test.cpp
         libambit/sport_mode_validate_test.cpp
         libambit/utils-test.cpp)
 

@@ -53,6 +53,7 @@ static int parse_sample(uint8_t *buf, size_t offset, uint8_t **spec, ambit_log_e
 static void correct_samples(ambit_log_entry_t *log_entry, int32_t *time_compensators);
 static int read_upto(libambit_pmem20_t *object, uint32_t address, uint32_t length);
 static int read_log_chunk(libambit_pmem20_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
+static int read_flash_chunk(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
 static int write_data_chunk(ambit_object_t *object, uint32_t address, size_t buffer_count, const uint8_t **buffers, const size_t *buffer_sizes);
 static void add_time(ambit_date_time_t *intime, int32_t offset, ambit_date_time_t *outtime);
 static int is_leap(unsigned int y);
@@ -610,6 +611,49 @@ int libambit_pmem20_app_data_write(libambit_pmem20_t *object, const uint8_t *dat
     return libambit_pmem20_data_write(object, PMEM20_APP_START, data, datalen);
 }
 
+int libambit_pmem20_data_write_addr(libambit_pmem20_t *object, uint32_t start_address, const uint8_t *data, size_t datalen, bool include_sha256_hash)
+{
+    int ret;
+    sha256_ctx ctx;
+    uint8_t hash[32];
+    uint8_t *tailbuf;
+    size_t tail_datalen = 8;
+    size_t last_chunk_size;
+    int i;
+
+    ret = libambit_pmem20_data_write(object, start_address, data, datalen);
+
+    if (ret == 0 && include_sha256_hash) {
+        // Ambit3-family regions are validated against the memory map's SHA256
+        // hash of only the bytes actually written (not the whole padded
+        // region), following the same [address][last chunk size][hex hash]
+        // tail shape already proven for gps_orbit_write().
+        sha256_init(&ctx);
+        sha256_update(&ctx, data, datalen);
+        sha256_final(&ctx, hash);
+        tail_datalen += 64;
+
+        last_chunk_size = datalen % object->chunk_size;
+        if (last_chunk_size == 0) {
+            last_chunk_size = (datalen < object->chunk_size) ? datalen : object->chunk_size;
+        }
+
+        if ((tailbuf = malloc(tail_datalen + 1)) != NULL) {
+            *((uint32_t*)(&tailbuf[0])) = htole32(start_address);
+            *((uint32_t*)(&tailbuf[4])) = htole32((uint32_t)last_chunk_size);
+            for (i = 0; i < 32; i++) {
+                sprintf((char*)tailbuf+8+i*2, "%02X", hash[i]);
+            }
+            ret = libambit_protocol_command(object->ambit_object, ambit_command_data_tail_len, tailbuf, tail_datalen, NULL, NULL, 0);
+            free(tailbuf);
+        } else {
+            ret = -1;
+        }
+    }
+
+    return ret;
+}
+
 /**
  * Parse the given sample
  * \return number of samples added (1 or 0)
@@ -1085,6 +1129,51 @@ static int read_log_chunk(libambit_pmem20_t *object, uint32_t address, uint32_t 
     }
 
     libambit_protocol_free(reply);
+
+    return ret;
+}
+
+static int read_flash_chunk(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer)
+{
+    int ret = -1;
+
+    uint8_t *reply = NULL;
+    size_t replylen = 0;
+
+    uint8_t send_data[8];
+    uint32_t *_address = (uint32_t*)&send_data[0];
+    uint32_t *_length = (uint32_t*)&send_data[4];
+
+    *_address = htole32(address);
+    *_length = htole32(length);
+
+    if (libambit_protocol_command(object, ambit_command_log_read, send_data, sizeof(send_data), &reply, &replylen, 0) == 0 &&
+        replylen == length + 8) {
+        memcpy(buffer, reply + 8, length);
+        ret = 0;
+    }
+
+    libambit_protocol_free(reply);
+
+    return ret;
+}
+
+int libambit_pmem20_flash_read(libambit_pmem20_t *object, uint32_t address, uint32_t length, uint8_t *buffer)
+{
+    int ret = 0;
+    uint32_t offset = 0;
+    uint32_t chunk_len;
+
+    while (offset < length) {
+        chunk_len = (length - offset > object->chunk_size) ? object->chunk_size : (length - offset);
+
+        ret = read_flash_chunk(object->ambit_object, address + offset, chunk_len, buffer + offset);
+        if (ret != 0) {
+            break;
+        }
+
+        offset += chunk_len;
+    }
 
     return ret;
 }

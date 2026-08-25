@@ -66,5 +66,15 @@ int libambit_pmem20_log_parse_header(uint8_t *data, size_t datalen, ambit_log_he
 int libambit_pmem20_gps_orbit_write(libambit_pmem20_t *object, const uint8_t *data, size_t datalen, bool include_sha256_hash);
 int libambit_pmem20_sport_mode_write(libambit_pmem20_t *object, const uint8_t *data, size_t datalen, bool include_sha256_hash);
 int libambit_pmem20_app_data_write(libambit_pmem20_t *object, const uint8_t *data, size_t datalen, bool include_sha256_hash);
+/* Ambit3-family devices discover region base addresses at runtime via the
+ * memory-map command rather than using fixed PMEM20 offsets, and validate a
+ * write against the region's SHA256 hash of the written bytes (not the whole
+ * padded region). This variant takes an explicit address for that. */
+int libambit_pmem20_data_write_addr(libambit_pmem20_t *object, uint32_t start_address, const uint8_t *data, size_t datalen, bool include_sha256_hash);
+/* Generic chunked flash read by address, for verifying writes/inspecting any
+ * region (Apps, CustomModes, TrainingProgram, ...) without a driver-specific
+ * higher-level parser. Reuses the same on-the-wire read command already used
+ * internally for exercise-log reads, just without the log-region bounds. */
+int libambit_pmem20_flash_read(libambit_pmem20_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
 
 #endif /* __PMEM20_H__ */

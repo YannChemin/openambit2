@@ -1,0 +1,106 @@
+{
+	"BUILD_DIR" : "/home/yann/dev/openambit2/build/src/openambit-routes/openambit-routes_autogen",
+	"CMAKE_BINARY_DIR" : "/home/yann/dev/openambit2/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/yann/dev/openambit2/build/src/openambit-routes",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/yann/dev/openambit2/src/openambit-routes",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/yann/dev/openambit2/src/openambit-routes/CMakeLists.txt",
+		"/home/yann/dev/openambit2/build/CMakeFiles/3.31.6/CMakeCXXCompiler.cmake",
+		"/usr/share/cmake-3.31/Modules/CMakeCXXInformation.cmake",
+		"/usr/share/cmake-3.31/Modules/CMakeLanguageInformation.cmake",
+		"/usr/share/cmake-3.31/Modules/Compiler/GNU-CXX.cmake",
+		"/usr/share/cmake-3.31/Modules/Compiler/GNU.cmake",
+		"/usr/share/cmake-3.31/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
+		"/usr/share/cmake-3.31/Modules/Platform/Linux-GNU-CXX.cmake",
+		"/usr/share/cmake-3.31/Modules/Platform/Linux-GNU.cmake",
+		"/usr/share/cmake-3.31/Modules/CMakeCommonLanguageInclude.cmake",
+		"/usr/share/cmake-3.31/Modules/Internal/CMakeCXXLinkerInformation.cmake",
+		"/usr/share/cmake-3.31/Modules/Internal/CMakeCommonLinkerInformation.cmake",
+		"/usr/share/cmake-3.31/Modules/Linker/GNU-CXX.cmake",
+		"/usr/share/cmake-3.31/Modules/Linker/GNU.cmake",
+		"/usr/share/cmake-3.31/Modules/Platform/Linker/Linux-GNU-CXX.cmake",
+		"/usr/share/cmake-3.31/Modules/Platform/Linker/Linux-GNU.cmake",
+		"/usr/share/cmake-3.31/Modules/Platform/Linker/GNU.cmake",
+		"/home/yann/dev/openambit2/src/openambit-routes/cmake/Findlibambit.cmake",
+		"/home/yann/dev/openambit2/src/openambit-routes/cmake/FindMovescount.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"/usr/share/cmake-3.31/Modules/CMakeParseArguments.cmake",
+		"/usr/share/cmake-3.31/Modules/GNUInstallDirs.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/yann/dev/openambit2",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "/home/yann/dev/openambit2/build/src/openambit-routes/openambit-routes_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "openambit-routes_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/yann/dev/openambit2/src/openambit-routes/Task.h",
+			"Mu",
+			"EWIEGA46WW/moc_Task.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/yann/dev/openambit2/build/src/openambit-routes/openambit-routes_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/yann/dev/openambit2/build/src/openambit-routes/openambit-routes_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "APP_VERSION=\"0.5\"", "QT_CORE_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/yann/dev/openambit2/src/openambit-routes",
+		"/home/yann/dev/openambit2/build/src/openambit-routes",
+		"/home/yann/dev/openambit2/src/libambit",
+		"/home/yann/dev/openambit2/src",
+		"/usr/include/x86_64-linux-gnu/qt5",
+		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
+		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
+		"/usr/include/c++/14",
+		"/usr/include/x86_64-linux-gnu/c++/14",
+		"/usr/include/c++/14/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/14/include",
+		"/usr/local/include",
+		"/usr/include/x86_64-linux-gnu",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.31/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/yann/dev/openambit2/build/src/openambit-routes/openambit-routes_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/yann/dev/openambit2/build/src/openambit-routes/CMakeFiles/openambit-routes_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "/home/yann/dev/openambit2/build/src/openambit-routes/CMakeFiles/openambit-routes_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "/home/yann/dev/openambit2/src/openambit-routes/Task.cpp", "Mu", null ],
+		[ "/home/yann/dev/openambit2/src/openambit-routes/main.cpp", "Mu", null ]
+	],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

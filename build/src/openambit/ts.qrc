@@ -1,0 +1,13 @@
+<RCC>
+	<qresource prefix="/translations">
+		<file alias="openambit_de.qm">openambit_de.qm</file>
+		<file alias="openambit_fr.qm">openambit_fr.qm</file>
+		<file alias="openambit_it.qm">openambit_it.qm</file>
+		<file alias="openambit_ja.qm">openambit_ja.qm</file>
+		<file alias="openambit_nb_NO.qm">openambit_nb_NO.qm</file>
+		<file alias="openambit_nl.qm">openambit_nl.qm</file>
+		<file alias="openambit_pl.qm">openambit_pl.qm</file>
+		<file alias="openambit_ru.qm">openambit_ru.qm</file>
+		<file alias="openambit_sv.qm">openambit_sv.qm</file>
+	</qresource>
+</RCC>

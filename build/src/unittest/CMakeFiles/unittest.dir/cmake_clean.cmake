@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/unittest.dir/link.d"
+  "CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/libambit/utils-test.cpp.o"
+  "CMakeFiles/unittest.dir/libambit/utils-test.cpp.o.d"
+  "CMakeFiles/unittest.dir/main.cpp.o"
+  "CMakeFiles/unittest.dir/main.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/logentry_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/logentry_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/movescount_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/movescount_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/movescountxml_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/movescountxml_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o.d"
+  "unittest"
+  "unittest.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/unittest.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

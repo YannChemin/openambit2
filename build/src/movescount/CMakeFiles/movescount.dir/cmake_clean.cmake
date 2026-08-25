@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  ".0"
+  "CMakeFiles/movescount.dir/link.d"
+  "CMakeFiles/movescount_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/movescount_autogen.dir/ParseCache.txt"
+  "movescount_autogen"
+  "CMakeFiles/movescount.dir/deviceinfo.cpp.o"
+  "CMakeFiles/movescount.dir/deviceinfo.cpp.o.d"
+  "CMakeFiles/movescount.dir/logentry.cpp.o"
+  "CMakeFiles/movescount.dir/logentry.cpp.o.d"
+  "CMakeFiles/movescount.dir/logstore.cpp.o"
+  "CMakeFiles/movescount.dir/logstore.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescount.cpp.o"
+  "CMakeFiles/movescount.dir/movescount.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescount_autogen/mocs_compilation.cpp.o"
+  "CMakeFiles/movescount.dir/movescount_autogen/mocs_compilation.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescountjson.cpp.o"
+  "CMakeFiles/movescount.dir/movescountjson.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescountlogchecker.cpp.o"
+  "CMakeFiles/movescount.dir/movescountlogchecker.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o"
+  "CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescountsettings.cpp.o"
+  "CMakeFiles/movescount.dir/movescountsettings.cpp.o.d"
+  "CMakeFiles/movescount.dir/movescountxml.cpp.o"
+  "CMakeFiles/movescount.dir/movescountxml.cpp.o.d"
+  "CMakeFiles/movescount.dir/sportmode.cpp.o"
+  "CMakeFiles/movescount.dir/sportmode.cpp.o.d"
+  "CMakeFiles/movescount.dir/sportmodegroup.cpp.o"
+  "CMakeFiles/movescount.dir/sportmodegroup.cpp.o.d"
+  "libmovescount.pdb"
+  "libmovescount.so"
+  "libmovescount.so.0"
+  "libmovescount.so.0.3.0"
+  "movescount_autogen/mocs_compilation.cpp"
+  "movescount_autogen/timestamp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/movescount.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
