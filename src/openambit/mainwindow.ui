@@ -400,6 +400,12 @@
     <addaction name="separator"/>
     <addaction name="actionE_xit"/>
    </widget>
+   <widget class="QMenu" name="menu_Tools">
+    <property name="title">
+     <string>&amp;Tools</string>
+    </property>
+    <addaction name="actionWorkoutBuilder"/>
+   </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
      <string>&amp;Help</string>
@@ -408,6 +414,7 @@
     <addaction name="actionAbout_openambit"/>
    </widget>
    <addaction name="menuOpenambit"/>
+   <addaction name="menu_Tools"/>
    <addaction name="menu_Help"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
@@ -451,6 +458,14 @@
    </property>
    <property name="text">
     <string>&amp;Settings</string>
+   </property>
+  </action>
+  <action name="actionWorkoutBuilder">
+   <property name="text">
+    <string>&amp;Workout Builder...</string>
+   </property>
+   <property name="toolTip">
+    <string>Build a structured workout and generate App Zone source (experimental)</string>
    </property>
   </action>
  </widget>
@@ -540,11 +555,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionWorkoutBuilder</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>showWorkoutBuilder()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>435</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>showSettings()</slot>
   <slot>closeRequested()</slot>
   <slot>showAbout()</slot>
   <slot>showReportBug()</slot>
+  <slot>showWorkoutBuilder()</slot>
  </slots>
 </ui>
