@@ -30,6 +30,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/unittest.dir/movescount/movescountxml_test.cpp.o.d"
   "CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o"
   "CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o.d"
+  "CMakeFiles/unittest.dir/movescount/workout_test.cpp.o"
+  "CMakeFiles/unittest.dir/movescount/workout_test.cpp.o.d"
   "unittest"
   "unittest.pdb"
 )

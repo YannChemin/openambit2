@@ -535,6 +535,30 @@ movescount/sportmode_test.cpp.s:
 	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/unittest/CMakeFiles/unittest.dir/build.make src/unittest/CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.s
 .PHONY : movescount/sportmode_test.cpp.s
 
+movescount/workout_test.o: movescount/workout_test.cpp.o
+.PHONY : movescount/workout_test.o
+
+# target to build an object file
+movescount/workout_test.cpp.o:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/unittest/CMakeFiles/unittest.dir/build.make src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o
+.PHONY : movescount/workout_test.cpp.o
+
+movescount/workout_test.i: movescount/workout_test.cpp.i
+.PHONY : movescount/workout_test.i
+
+# target to preprocess a source file
+movescount/workout_test.cpp.i:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/unittest/CMakeFiles/unittest.dir/build.make src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.i
+.PHONY : movescount/workout_test.cpp.i
+
+movescount/workout_test.s: movescount/workout_test.cpp.s
+.PHONY : movescount/workout_test.s
+
+# target to generate assembly for a file
+movescount/workout_test.cpp.s:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/unittest/CMakeFiles/unittest.dir/build.make src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.s
+.PHONY : movescount/workout_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -593,6 +617,9 @@ help:
 	@echo "... movescount/sportmode_test.o"
 	@echo "... movescount/sportmode_test.i"
 	@echo "... movescount/sportmode_test.s"
+	@echo "... movescount/workout_test.o"
+	@echo "... movescount/workout_test.i"
+	@echo "... movescount/workout_test.s"
 .PHONY : help
 
 

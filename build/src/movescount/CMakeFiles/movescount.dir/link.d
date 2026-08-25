@@ -5,6 +5,7 @@ libmovescount.so.0.3.0: \
   CMakeFiles/movescount.dir/deviceinfo.cpp.o \
   CMakeFiles/movescount.dir/sportmode.cpp.o \
   CMakeFiles/movescount.dir/sportmodegroup.cpp.o \
+  CMakeFiles/movescount.dir/workout.cpp.o \
   CMakeFiles/movescount.dir/movescountsettings.cpp.o \
   CMakeFiles/movescount.dir/logentry.cpp.o \
   CMakeFiles/movescount.dir/logstore.cpp.o \
@@ -53,6 +54,8 @@ CMakeFiles/movescount.dir/deviceinfo.cpp.o:
 CMakeFiles/movescount.dir/sportmode.cpp.o:
 
 CMakeFiles/movescount.dir/sportmodegroup.cpp.o:
+
+CMakeFiles/movescount.dir/workout.cpp.o:
 
 CMakeFiles/movescount.dir/movescountsettings.cpp.o:
 

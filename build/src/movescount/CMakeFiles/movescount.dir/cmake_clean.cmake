@@ -28,6 +28,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/movescount.dir/sportmode.cpp.o.d"
   "CMakeFiles/movescount.dir/sportmodegroup.cpp.o"
   "CMakeFiles/movescount.dir/sportmodegroup.cpp.o.d"
+  "CMakeFiles/movescount.dir/workout.cpp.o"
+  "CMakeFiles/movescount.dir/workout.cpp.o.d"
   "libmovescount.pdb"
   "libmovescount.so"
   "libmovescount.so.0"

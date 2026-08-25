@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/yann/dev/openambit2/src/movescount/movescountxml.cpp" "src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o" "gcc" "src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o.d"
   "/home/yann/dev/openambit2/src/movescount/sportmode.cpp" "src/movescount/CMakeFiles/movescount.dir/sportmode.cpp.o" "gcc" "src/movescount/CMakeFiles/movescount.dir/sportmode.cpp.o.d"
   "/home/yann/dev/openambit2/src/movescount/sportmodegroup.cpp" "src/movescount/CMakeFiles/movescount.dir/sportmodegroup.cpp.o" "gcc" "src/movescount/CMakeFiles/movescount.dir/sportmodegroup.cpp.o.d"
+  "/home/yann/dev/openambit2/src/movescount/workout.cpp" "src/movescount/CMakeFiles/movescount.dir/workout.cpp.o" "gcc" "src/movescount/CMakeFiles/movescount.dir/workout.cpp.o.d"
   "" "src/movescount/libmovescount.so" "gcc" "src/movescount/CMakeFiles/movescount.dir/link.d"
   )
 

@@ -491,6 +491,30 @@ sportmodegroup.cpp.s:
 	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/movescount/CMakeFiles/movescount.dir/build.make src/movescount/CMakeFiles/movescount.dir/sportmodegroup.cpp.s
 .PHONY : sportmodegroup.cpp.s
 
+workout.o: workout.cpp.o
+.PHONY : workout.o
+
+# target to build an object file
+workout.cpp.o:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/movescount/CMakeFiles/movescount.dir/build.make src/movescount/CMakeFiles/movescount.dir/workout.cpp.o
+.PHONY : workout.cpp.o
+
+workout.i: workout.cpp.i
+.PHONY : workout.i
+
+# target to preprocess a source file
+workout.cpp.i:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/movescount/CMakeFiles/movescount.dir/build.make src/movescount/CMakeFiles/movescount.dir/workout.cpp.i
+.PHONY : workout.cpp.i
+
+workout.s: workout.cpp.s
+.PHONY : workout.s
+
+# target to generate assembly for a file
+workout.cpp.s:
+	cd /home/yann/dev/openambit2/build && $(MAKE) $(MAKESILENT) -f src/movescount/CMakeFiles/movescount.dir/build.make src/movescount/CMakeFiles/movescount.dir/workout.cpp.s
+.PHONY : workout.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -542,6 +566,9 @@ help:
 	@echo "... sportmodegroup.o"
 	@echo "... sportmodegroup.i"
 	@echo "... sportmodegroup.s"
+	@echo "... workout.o"
+	@echo "... workout.i"
+	@echo "... workout.s"
 .PHONY : help
 
 

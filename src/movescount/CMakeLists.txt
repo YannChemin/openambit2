@@ -49,6 +49,7 @@ add_library(
   deviceinfo.cpp
   sportmode.cpp
   sportmodegroup.cpp
+  workout.cpp
   movescountsettings.cpp
   logentry.cpp
   logstore.cpp

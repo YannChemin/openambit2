@@ -46,6 +46,7 @@ set(TEST_SRCS
         movescount/movescountlogchecker_test.cpp
         movescount/movescountsettings_test.cpp
         movescount/sportmode_test.cpp
+        movescount/workout_test.cpp
 
         # libambit
         libambit/crc16_test.cpp

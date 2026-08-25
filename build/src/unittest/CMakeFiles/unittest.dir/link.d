@@ -11,6 +11,7 @@ unittest: \
   CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o \
   CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o \
   CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o \
+  CMakeFiles/unittest.dir/movescount/workout_test.cpp.o \
   CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o \
   CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o \
   CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o \
@@ -118,6 +119,8 @@ CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o:
 CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o:
 
 CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o:
+
+CMakeFiles/unittest.dir/movescount/workout_test.cpp.o:
 
 CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o:
 

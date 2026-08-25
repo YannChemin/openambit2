@@ -28,37 +28,154 @@ src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o: /home/yann/dev/o
 src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/custom_modes_bxml_test.cpp \
   /home/yann/dev/openambit2/src/libambit/custom_modes_bxml.h \
   /home/yann/dev/openambit2/src/unittest/doctest.h \
+  /usr/include/alloca.h \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/c++/14/backward/binders.h \
+  /usr/include/c++/14/bit \
+  /usr/include/c++/14/bits/alloc_traits.h \
+  /usr/include/c++/14/bits/allocator.h \
+  /usr/include/c++/14/bits/basic_string.h \
+  /usr/include/c++/14/bits/basic_string.tcc \
+  /usr/include/c++/14/bits/char_traits.h \
+  /usr/include/c++/14/bits/charconv.h \
+  /usr/include/c++/14/bits/concept_check.h \
+  /usr/include/c++/14/bits/cpp_type_traits.h \
+  /usr/include/c++/14/bits/cxxabi_forced.h \
+  /usr/include/c++/14/bits/exception.h \
+  /usr/include/c++/14/bits/exception_defines.h \
+  /usr/include/c++/14/bits/functexcept.h \
+  /usr/include/c++/14/bits/functional_hash.h \
+  /usr/include/c++/14/bits/hash_bytes.h \
+  /usr/include/c++/14/bits/invoke.h \
+  /usr/include/c++/14/bits/localefwd.h \
+  /usr/include/c++/14/bits/memory_resource.h \
+  /usr/include/c++/14/bits/memoryfwd.h \
+  /usr/include/c++/14/bits/move.h \
+  /usr/include/c++/14/bits/new_allocator.h \
+  /usr/include/c++/14/bits/ostream_insert.h \
+  /usr/include/c++/14/bits/postypes.h \
+  /usr/include/c++/14/bits/predefined_ops.h \
+  /usr/include/c++/14/bits/ptr_traits.h \
+  /usr/include/c++/14/bits/range_access.h \
+  /usr/include/c++/14/bits/refwrap.h \
+  /usr/include/c++/14/bits/requires_hosted.h \
+  /usr/include/c++/14/bits/std_abs.h \
+  /usr/include/c++/14/bits/stl_algobase.h \
+  /usr/include/c++/14/bits/stl_construct.h \
+  /usr/include/c++/14/bits/stl_function.h \
+  /usr/include/c++/14/bits/stl_iterator.h \
+  /usr/include/c++/14/bits/stl_iterator_base_funcs.h \
+  /usr/include/c++/14/bits/stl_iterator_base_types.h \
+  /usr/include/c++/14/bits/stl_pair.h \
+  /usr/include/c++/14/bits/string_view.tcc \
+  /usr/include/c++/14/bits/stringfwd.h \
+  /usr/include/c++/14/bits/uses_allocator.h \
+  /usr/include/c++/14/bits/uses_allocator_args.h \
+  /usr/include/c++/14/bits/utility.h \
   /usr/include/c++/14/bits/version.h \
+  /usr/include/c++/14/cctype \
+  /usr/include/c++/14/cerrno \
+  /usr/include/c++/14/clocale \
+  /usr/include/c++/14/concepts \
+  /usr/include/c++/14/cstddef \
+  /usr/include/c++/14/cstdio \
+  /usr/include/c++/14/cstdlib \
   /usr/include/c++/14/cstring \
+  /usr/include/c++/14/cwchar \
+  /usr/include/c++/14/debug/assertions.h \
+  /usr/include/c++/14/debug/debug.h \
+  /usr/include/c++/14/ext/alloc_traits.h \
+  /usr/include/c++/14/ext/numeric_traits.h \
+  /usr/include/c++/14/ext/string_conversions.h \
+  /usr/include/c++/14/ext/type_traits.h \
+  /usr/include/c++/14/initializer_list \
+  /usr/include/c++/14/iosfwd \
+  /usr/include/c++/14/new \
   /usr/include/c++/14/pstl/pstl_config.h \
+  /usr/include/c++/14/string \
+  /usr/include/c++/14/string_view \
+  /usr/include/c++/14/tuple \
+  /usr/include/c++/14/type_traits \
+  /usr/include/ctype.h \
+  /usr/include/endian.h \
+  /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/linux/errno.h \
+  /usr/include/locale.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
+  /usr/include/stdio.h \
+  /usr/include/stdlib.h \
   /usr/include/string.h \
   /usr/include/strings.h \
+  /usr/include/wchar.h \
+  /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/endian.h \
+  /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
+  /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/x86_64-linux-gnu/bits/select.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
   /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h \
   /usr/include/x86_64-linux-gnu/bits/time64.h \
   /usr/include/x86_64-linux-gnu/bits/timesize.h \
   /usr/include/x86_64-linux-gnu/bits/types.h \
+  /usr/include/x86_64-linux-gnu/bits/types/FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/x86_64-linux-gnu/bits/types/time_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+  /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+  /usr/include/x86_64-linux-gnu/c++/14/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/14/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/14/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+  /usr/include/x86_64-linux-gnu/sys/select.h \
+  /usr/include/x86_64-linux-gnu/sys/types.h \
+  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h \
   /usr/lib/gcc/x86_64-linux-gnu/14/include/stddef.h \
-  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h
+  /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h \
+  /usr/lib/linux/uapi/x86/asm/errno.h
 
 src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/device_support_test.cpp \
   /home/yann/dev/openambit2/src/libambit/device_support.h \
@@ -3421,6 +3538,7 @@ src/unittest/unittest: src/libambit/libambit.so.0 \
   /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.15 \
   /usr/lib/x86_64-linux-gnu/libc_nonshared.a \
   src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o \
+  src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o \
   src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o \
   src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o \
   src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o \
@@ -3494,16 +3612,6 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescount_test.cpp.o:
 
 /lib/x86_64-linux-gnu/libm.so.6:
 
-/usr/include/c++/14/pstl/execution_defs.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h:
-
-/usr/include/asm-generic/types.h:
-
-/usr/include/c++/14/tr1/modified_bessel_func.tcc:
-
 /usr/include/c++/14/tr1/exp_integral.tcc:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/messages_members.h:
@@ -3516,35 +3624,23 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescount_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/sched.h:
 
+/usr/include/c++/14/pstl/execution_defs.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/include/stdarg.h:
+
+/usr/include/asm-generic/types.h:
+
 /usr/include/c++/14/iomanip:
 
 /usr/include/c++/14/bits/functional_hash.h:
 
-/usr/include/c++/14/initializer_list:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
 /usr/include/c++/14/fstream:
-
-/usr/include/c++/14/ext/type_traits.h:
-
-/usr/include/c++/14/ext/string_conversions.h:
 
 /usr/include/c++/14/map:
 
 /usr/include/c++/14/ext/atomicity.h:
-
-/usr/include/c++/14/ext/alloc_traits.h:
-
-/usr/include/c++/14/mutex:
-
-/usr/include/c++/14/ext/aligned_buffer.h:
-
-/usr/include/c++/14/bits/ostream.tcc:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h:
 
 /usr/include/c++/14/exception:
 
@@ -3552,39 +3648,19 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescount_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
 
-/usr/include/c++/14/tr1/hypergeometric.tcc:
-
 /usr/include/asm-generic/bitsperlong.h:
 
 /usr/include/c++/14/cwctype:
 
 /usr/include/c++/14/ext/numeric_traits.h:
 
-/usr/include/c++/14/cstdio:
-
-/usr/include/c++/14/bits/utility.h:
-
-/home/yann/dev/openambit2/src/movescount/movescountxml.h:
-
 /usr/include/c++/14/cstdint:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QVector:
 
-/usr/lib/x86_64-linux-gnu/libc_nonshared.a:
-
-/usr/include/c++/14/cstddef:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h:
-
 src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/c++/14/csignal:
-
-/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
-
-/home/yann/dev/openambit2/src/unittest/movescount/sportmode_test.cpp:
-
-/usr/include/c++/14/cerrno:
 
 /usr/include/c++/14/bits/vector.tcc:
 
@@ -3594,33 +3670,11 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/c++/14/debug/assertions.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h:
-
-/usr/include/c++/14/bits/unique_lock.h:
-
-/home/yann/dev/openambit2/src/libambit/utils.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/c++/14/bits/uniform_int_dist.h:
 
-/usr/lib/i386-linux-gnu/libpcre2-8.so.0:
-
-/usr/include/c++/14/bits/postypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/c++/14/bits/stringfwd.h:
-
-/usr/include/c++/14/bits/stl_function.h:
-
-/usr/include/c++/14/memory:
-
-/usr/include/c++/14/bits/stl_construct.h:
 
 /usr/include/c++/14/bits/stl_multimap.h:
 
@@ -3636,45 +3690,17 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/qt5/QtNetwork/QSslConfiguration:
 
-/usr/include/c++/14/bits/refwrap.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QCoreApplication:
-
 /usr/include/c++/14/bits/quoted_string.h:
 
-/usr/include/c++/14/tr1/beta_function.tcc:
-
 /usr/include/c++/14/ostream:
-
-/usr/include/c++/14/bits/stl_pair.h:
 
 /usr/include/c++/14/bits/node_handle.h:
 
 /usr/include/features.h:
 
-/usr/include/c++/14/bits/move.h:
-
-/usr/include/c++/14/tr1/ell_integral.tcc:
-
-/usr/include/c++/14/bits/memoryfwd.h:
-
-/usr/include/c++/14/bits/unordered_set.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h:
-
 /usr/include/c++/14/bits/locale_facets_nonio.tcc:
 
-/usr/include/c++/14/bits/locale_facets_nonio.h:
-
-/usr/include/c++/14/bits/locale_conv.h:
-
-/home/yann/dev/openambit2/src/movescount/logstore.h:
-
 /usr/include/c++/14/bits/locale_classes.tcc:
-
-/usr/include/c++/14/unordered_set:
 
 /home/yann/dev/openambit2/src/movescount/movescountlogdirentry.h:
 
@@ -3688,35 +3714,113 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/posix2_lim.h:
 
-/usr/include/c++/14/bits/invoke.h:
-
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/c++/14/bits/stl_map.h:
-
 /usr/include/c++/14/bits/fstream.tcc:
+
+/home/yann/dev/openambit2/src/libambit/device_support.h:
+
+/usr/include/c++/14/bits/std_function.h:
+
+src/movescount/libmovescount.so.0:
+
+/usr/include/c++/14/utility:
+
+/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qnetworkaccessmanager.h:
+
+/usr/include/c++/14/bits/basic_ios.h:
+
+src/unittest/CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o:
+
+/usr/include/linux/limits.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h:
+
+/usr/include/c++/14/bits/ostream.tcc:
+
+/usr/include/c++/14/ext/aligned_buffer.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/c++/14/ios:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h:
+
+/usr/include/c++/14/sstream:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qstringalgorithms.h:
+
+/usr/include/c++/14/cmath:
+
+/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qsslerror.h:
+
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/home/yann/dev/openambit2/src/unittest/libambit/sport_mode_validate_test.cpp:
+
+/usr/include/c++/14/bits/alloc_traits.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/basic_file.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QMap:
+
+/usr/include/x86_64-linux-gnu/bits/timex.h:
+
+/home/yann/dev/openambit2/src/unittest/libambit/device_support_test.cpp:
+
+/usr/include/x86_64-linux-gnu/bits/time.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qconfig.h:
+
+/usr/include/time.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
+/home/yann/dev/openambit2/src/libambit/sport_mode_serialize.h:
+
+/home/yann/dev/openambit2/src/libambit/libambit.h:
+
+/usr/include/c++/14/numeric:
+
+/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant:
+
+/usr/lib/i386-linux-gnu/libglib-2.0.so.0:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/cpu_defines.h:
 
 /lib/x86_64-linux-gnu/libudev.so.1:
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
-/usr/include/x86_64-linux-gnu/c++/14/bits/cpu_defines.h:
+/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
 
-/home/yann/dev/openambit2/src/libambit/sport_mode_serialize.h:
+/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
 
-/usr/include/string.h:
+/usr/include/c++/14/bits/std_thread.h:
 
-/usr/include/c++/14/bits/allocator.h:
+/home/yann/dev/openambit2/src/unittest/main.cpp:
 
-/usr/include/c++/14/bits/exception_ptr.h:
+/usr/include/c++/14/cerrno:
 
-/home/yann/dev/openambit2/src/movescount/deviceinfo.h:
+/usr/include/c++/14/bits/locale_facets_nonio.h:
 
-/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+/usr/include/x86_64-linux-gnu/c++/14/bits/c++allocator.h:
 
-/usr/include/c++/14/ios:
+/usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
-/usr/include/asm-generic/int-ll64.h:
+/usr/include/c++/14/bits/hash_bytes.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/c++/14/bits/streambuf.tcc:
 
@@ -3730,83 +3834,115 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /home/yann/dev/openambit2/src/unittest/movescount/movescountxml_test.cpp:
 
-/home/yann/dev/openambit2/src/libambit/libambit.h:
+/usr/include/stdio.h:
 
-/usr/include/c++/14/numeric:
+/usr/include/c++/14/bits/stl_relops.h:
 
-/usr/include/c++/14/tr1/legendre_function.tcc:
+/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
-/lib/i386-linux-gnu/libkrb5support.so.0:
+/usr/include/c++/14/tr1/ell_integral.tcc:
 
-/lib/x86_64-linux-gnu/libgssapi_krb5.so.2:
+/usr/include/c++/14/bits/move.h:
 
-/usr/include/c++/14/bits/exception_defines.h:
+/usr/include/c++/14/bits/erase_if.h:
 
-/usr/include/c++/14/bits/shared_ptr_base.h:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs_impl.h:
 
-/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QString:
+
+/usr/include/c++/14/bits/stl_construct.h:
+
+/usr/include/c++/14/bits/memoryfwd.h:
+
+/usr/include/c++/14/bits/unordered_set.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h:
 
 /usr/include/c++/14/bits/stl_bvector.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
 
-/home/yann/dev/openambit2/src/unittest/libambit/device_support_test.cpp:
+/usr/include/c++/14/tr1/beta_function.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/timex.h:
+/usr/lib/i386-linux-gnu/libpcre2-8.so.0:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant:
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
 
-/usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
+/usr/include/c++/14/bits/postypes.h:
 
-/usr/include/stdio.h:
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
-/usr/include/alloca.h:
+/usr/include/c++/14/initializer_list:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
 
-/usr/lib/i386-linux-gnu/libkrb5support.so.0:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qglobalstatic.h:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h:
-
-/home/yann/dev/openambit2/src/libambit/device_support.h:
-
-/usr/include/c++/14/bits/std_function.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/c++/14/bits/concept_check.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
-
-/home/yann/dev/openambit2/src/unittest/doctest.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstringalgorithms.h:
-
-/usr/include/c++/14/cmath:
-
-/usr/include/c++/14/sstream:
-
-/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qsslerror.h:
-
-/usr/include/x86_64-linux-gnu/sys/cdefs.h:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/gthr-default.h:
-
-/usr/include/c++/14/bits/stl_relops.h:
-
-/usr/include/c++/14/tuple:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h:
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
-/home/yann/dev/openambit2/src/unittest/main.cpp:
+/usr/include/c++/14/bits/utility.h:
+
+/usr/include/c++/14/cstdio:
+
+/home/yann/dev/openambit2/src/movescount/movescountxml.h:
+
+/usr/include/c++/14/bits/invoke.h:
+
+/usr/include/c++/14/tr1/bessel_function.tcc:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
+
+/lib/x86_64-linux-gnu/libicui18n.so.76:
+
+/usr/include/c++/14/locale:
+
+/usr/include/x86_64-linux-gnu/bits/sigstksz.h:
+
+/usr/include/c++/14/bits/cpp_type_traits.h:
+
+/usr/include/alloca.h:
+
+/usr/include/c++/14/bits/charconv.h:
+
+/usr/include/c++/14/stdlib.h:
+
+/home/yann/dev/openambit2/src/libambit/crc16.h:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/c++locale.h:
+
+/usr/include/c++/14/bits/stl_heap.h:
+
+/usr/include/c++/14/bits/allocator.h:
+
+/usr/include/string.h:
+
+/usr/include/c++/14/bits/exception_ptr.h:
+
+/home/yann/dev/openambit2/src/movescount/deviceinfo.h:
 
 /lib/x86_64-linux-gnu/libmvec.so.1:
 
 /usr/include/c++/14/ctime:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/x86_64-linux-gnu/sys/cdefs.h:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/gthr-default.h:
+
+/usr/include/c++/14/bits/stl_pair.h:
 
 /usr/lib/gcc/x86_64-linux-gnu/14/include/stdint.h:
 
@@ -3816,33 +3952,33 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /home/yann/dev/openambit2/src/unittest/movescount/logstore_test.cpp:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer:
+/usr/include/c++/14/backward/binders.h:
 
-/usr/include/c++/14/tr1/special_function_util.h:
-
-/usr/include/stdint.h:
+/lib/x86_64-linux-gnu/libglib-2.0.so.0:
 
 /usr/include/c++/14/bits/cxxabi_forced.h:
 
-/usr/include/c++/14/clocale:
+/usr/include/stdint.h:
 
-/usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h:
+/usr/include/c++/14/bits/char_traits.h:
 
-/usr/lib/x86_64-linux-gnu/crtn.o:
+/usr/include/c++/14/list:
 
-/usr/include/x86_64-linux-gnu/qt5/QtNetwork/QNetworkRequest:
+/usr/include/c++/14/bits/exception.h:
+
+/usr/include/c++/14/cctype:
+
+/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/home/yann/dev/openambit2/src/movescount/logentry.h:
+
+/lib64/ld-linux-x86-64.so.2:
+
+/usr/include/c++/14/type_traits:
 
 /usr/include/c++/14/pstl/glue_algorithm_defs.h:
 
 /home/yann/dev/openambit2/src/unittest/libambit/crc16_test.cpp:
-
-/usr/include/c++/14/bits/localefwd.h:
-
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
@@ -3856,49 +3992,31 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/c++/14/system_error:
 
-/usr/include/c++/14/tr1/bessel_function.tcc:
+/usr/include/c++/14/bit:
 
-/usr/include/stdc-predef.h:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QXmlStreamReader:
 
-/usr/include/asm-generic/posix_types.h:
+/usr/include/c++/14/bits/refwrap.h:
 
-/usr/include/c++/14/locale:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h:
 
-/usr/lib/x86_64-linux-gnu/libc.so:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QCoreApplication:
 
-/usr/lib/x86_64-linux-gnu/Scrt1.o:
+/home/yann/dev/openambit2/src/libambit/utils.h:
 
-/usr/include/c++/14/bits/stl_uninitialized.h:
+/usr/include/c++/14/bits/unique_lock.h:
 
-/usr/include/c++/14/bits/locale_classes.h:
+/usr/include/c++/14/bits/hashtable.h:
 
-/usr/include/c++/14/stdexcept:
+/usr/include/x86_64-linux-gnu/bits/errno.h:
 
-/usr/include/x86_64-linux-gnu/bits/select.h:
+/usr/include/x86_64-linux-gnu/bits/signum-arch.h:
 
-/usr/include/x86_64-linux-gnu/bits/time.h:
+/usr/include/x86_64-linux-gnu/bits/stdint-intn.h:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qconfig.h:
-
-/usr/include/time.h:
-
-/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
-
-/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+/usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/c++/14/bits/atomic_base.h:
-
-/usr/include/c++/14/stdlib.h:
-
-/usr/include/c++/14/bits/stl_multiset.h:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h:
 
@@ -3906,165 +4024,11 @@ src/unittest/CMakeFiles/unittest.dir/movescount/logstore_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QDateTime:
 
-/usr/include/c++/14/bits/version.h:
+/usr/lib/i386-linux-gnu/libkrb5support.so.0:
 
-/usr/include/c++/14/bits/align.h:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qabstractsocket.h:
-
-/lib/i386-linux-gnu/libatomic.so.1:
-
-/usr/include/c++/14/bits/std_abs.h:
-
-/usr/include/c++/14/pstl/pstl_config.h:
-
-/usr/include/c++/14/utility:
-
-/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qnetworkaccessmanager.h:
-
-/usr/include/c++/14/bits/basic_ios.h:
-
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
-
-/usr/include/c++/14/iostream:
-
-/usr/include/c++/14/bits/requires_hosted.h:
-
-/home/yann/dev/openambit2/src/movescount/movescountlogchecker.h:
-
-/usr/include/strings.h:
-
-/usr/include/malloc.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
-
-/usr/include/libintl.h:
-
-/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
-
-/usr/include/c++/14/debug/debug.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
-
-/usr/lib/gcc/x86_64-linux-gnu/14/include/stdbool.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QString:
-
-/usr/include/c++/14/tr1/poly_hermite.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
-
-/usr/include/math.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qglobalstatic.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/basic_file.h:
-
-/usr/include/c++/14/iosfwd:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/gthr.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QMap:
-
-/usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
-
-/lib/x86_64-linux-gnu/libicui18n.so.76:
-
-/usr/include/x86_64-linux-gnu/bits/waitflags.h:
-
-/usr/include/c++/14/bits/hash_bytes.h:
-
-src/unittest/CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o:
-
-/usr/include/linux/limits.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h:
-
-/lib64/ld-linux-x86-64.so.2:
-
-/usr/include/c++/14/type_traits:
-
-/usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/home/yann/dev/openambit2/src/movescount/logentry.h:
-
-/usr/lib/i386-linux-gnu/libglib-2.0.so.0:
-
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
-/home/yann/dev/openambit2/src/unittest/libambit/sport_mode_validate_test.cpp:
-
-/usr/include/c++/14/bits/alloc_traits.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
-
-/usr/include/wchar.h:
-
-/usr/include/c++/14/bits/stl_iterator_base_funcs.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qcryptographichash.h:
-
-/usr/include/c++/14/variant:
-
-/usr/include/c++/14/bits/codecvt.h:
-
-src/movescount/libmovescount.so.0:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
-
-/home/yann/dev/openambit2/src/unittest/movescount/movescountsettings_test.cpp:
-
-/usr/include/c++/14/bits/stl_iterator_base_types.h:
-
-/usr/include/x86_64-linux-gnu/bits/wchar.h:
-
-/usr/include/c++/14/compare:
-
-/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
-
-/usr/include/c++/14/streambuf:
-
-/usr/include/c++/14/bits/string_view.tcc:
-
-/usr/include/assert.h:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstringliteral.h:
-
-/home/yann/dev/openambit2/src/unittest/libambit/utils-test.cpp:
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QObject:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/c++/14/bits/stl_tempbuf.h:
-
-/usr/include/linux/stddef.h:
-
-/usr/include/signal.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/usr/include/c++/14/bits/char_traits.h:
-
-/usr/include/c++/14/list:
+/usr/include/x86_64-linux-gnu/bits/time64.h:
 
 /usr/include/c++/14/bits/predefined_ops.h:
 
@@ -4076,9 +4040,25 @@ src/movescount/libmovescount.so.0:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h:
 
+src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o:
+
 /usr/include/x86_64-linux-gnu/qt5/QtNetwork/qtcpsocket.h:
 
-/usr/include/c++/14/bits/stl_iterator.h:
+/usr/include/c++/14/bits/stl_function.h:
+
+/usr/include/c++/14/memory:
+
+/usr/include/c++/14/streambuf:
+
+/usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-least.h:
+
+/usr/include/c++/14/bits/string_view.tcc:
+
+/home/yann/dev/openambit2/src/unittest/libambit/utils-test.cpp:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QObject:
 
 /usr/include/c++/14/bits/stl_algobase.h:
 
@@ -4090,33 +4070,99 @@ src/movescount/libmovescount.so.0:
 
 /usr/include/asm-generic/errno-base.h:
 
-/usr/include/c++/14/istream:
+/usr/include/c++/14/bits/stl_iterator.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/14/include/float.h:
+/usr/include/c++/14/compare:
 
-/usr/include/stdlib.h:
+/usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
-/usr/include/x86_64-linux-gnu/bits/timesize.h:
+/usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-/usr/include/c++/14/algorithm:
+/home/yann/dev/openambit2/src/unittest/movescount/movescountsettings_test.cpp:
 
-/usr/include/c++/14/backward/binders.h:
+/usr/include/c++/14/bits/stl_iterator_base_types.h:
 
-/lib/x86_64-linux-gnu/libglib-2.0.so.0:
+/usr/include/c++/14/bits/stl_multiset.h:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QXmlStreamReader:
+/usr/include/x86_64-linux-gnu/c++/14/bits/os_defines.h:
 
-/usr/include/c++/14/bit:
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
-/usr/include/c++/14/bits/locale_facets.tcc:
+/usr/lib/linux/uapi/x86/asm/posix_types_64.h:
 
 /usr/include/c++/14/bits/chrono.h:
 
-/home/yann/dev/openambit2/src/libambit/crc16.h:
+/usr/include/c++/14/bits/locale_facets.tcc:
 
-/usr/include/c++/14/bits/charconv.h:
+/usr/include/c++/14/bits/codecvt.h:
 
-/usr/include/c++/14/tr1/riemann_zeta.tcc:
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qcryptographichash.h:
+
+/usr/include/c++/14/variant:
+
+/home/yann/dev/openambit2/src/unittest/doctest.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/include/c++/14/bits/concept_check.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_sigstack.h:
+
+/usr/include/c++/14/bits/stringfwd.h:
+
+/home/yann/dev/openambit2/src/unittest/movescount/sportmode_test.cpp:
+
+/usr/include/c++/14/bits/version.h:
+
+/usr/include/c++/14/bits/align.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtNetwork/qabstractsocket.h:
+
+/usr/include/c++/14/bits/exception_defines.h:
+
+/usr/include/c++/14/bits/shared_ptr_base.h:
+
+/usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/x86_64-linux-gnu/bits/locale.h:
+
+/usr/lib/x86_64-linux-gnu/libc.so:
+
+/usr/lib/x86_64-linux-gnu/Scrt1.o:
+
+/usr/include/c++/14/bits/stl_uninitialized.h:
+
+/usr/include/c++/14/bits/locale_classes.h:
+
+/usr/include/c++/14/clocale:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/ctype_inline.h:
+
+/usr/lib/x86_64-linux-gnu/crtn.o:
+
+/usr/include/x86_64-linux-gnu/qt5/QtNetwork/QNetworkRequest:
+
+/usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
+
+/usr/include/math.h:
+
+/usr/lib/x86_64-linux-gnu/libc_nonshared.a:
+
+/usr/include/c++/14/cstddef:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h:
+
+/usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/c++/14/stdexcept:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer:
+
+/usr/include/c++/14/tr1/special_function_util.h:
 
 /usr/include/c++/14/cwchar:
 
@@ -4126,29 +4172,133 @@ src/movescount/libmovescount.so.0:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainertools_impl.h:
 
-/usr/include/c++/14/bits/cpp_type_traits.h:
+/usr/include/c++/14/bits/locale_conv.h:
 
-/usr/include/c++/14/tr1/poly_laguerre.tcc:
+/home/yann/dev/openambit2/src/movescount/logstore.h:
+
+/usr/include/x86_64-linux-gnu/c++/14/bits/gthr.h:
+
+/usr/include/c++/14/iosfwd:
+
+/usr/include/c++/14/debug/assertions.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h:
+
+/usr/include/c++/14/ext/alloc_traits.h:
+
+/usr/include/c++/14/ext/string_conversions.h:
+
+/usr/include/c++/14/ext/type_traits.h:
+
+/lib/x86_64-linux-gnu/libkrb5support.so.0:
+
+/usr/include/locale.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/c++/14/mutex:
 
 /usr/include/c++/14/string_view:
 
-/usr/include/c++/14/bits/erase_if.h:
+/usr/include/c++/14/tuple:
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs_impl.h:
+/usr/include/c++/14/bits/localefwd.h:
 
-/usr/include/c++/14/cctype:
+/usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
-/usr/include/c++/14/bits/exception.h:
+/usr/include/c++/14/debug/debug.h:
 
-/usr/include/c++/14/vector:
-
-/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
+/usr/include/c++/14/tr1/hypergeometric.tcc:
 
 /usr/include/errno.h:
 
 /home/yann/dev/openambit2/src/movescount/sportmode.h:
 
 /home/yann/dev/openambit2/src/movescount/movescountjson.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/c++/14/istream:
+
+/usr/lib/gcc/x86_64-linux-gnu/14/include/float.h:
+
+/usr/include/x86_64-linux-gnu/bits/timesize.h:
+
+/usr/include/c++/14/algorithm:
+
+/usr/include/stdlib.h:
+
+/lib/i386-linux-gnu/libatomic.so.1:
+
+/usr/include/c++/14/bits/std_abs.h:
+
+/usr/include/c++/14/pstl/pstl_config.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/wchar.h:
+
+/usr/include/c++/14/bits/stl_iterator_base_funcs.h:
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qstringliteral.h:
+
+/usr/include/assert.h:
+
+/usr/include/c++/14/bits/stl_tempbuf.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/FILE.h:
+
+/usr/include/c++/14/iostream:
+
+/usr/include/c++/14/bits/requires_hosted.h:
+
+/home/yann/dev/openambit2/src/movescount/movescountlogchecker.h:
+
+/usr/include/strings.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/signal.h:
+
+/usr/include/malloc.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+
+/usr/include/libintl.h:
+
+/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
+
+/usr/include/c++/14/tr1/legendre_function.tcc:
+
+/lib/i386-linux-gnu/libkrb5support.so.0:
+
+/lib/x86_64-linux-gnu/libgssapi_krb5.so.2:
+
+/usr/include/c++/14/tr1/modified_bessel_func.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/c++/14/tr1/poly_hermite.tcc:
+
+/usr/include/c++/14/bits/stl_map.h:
+
+/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/c++/14/tr1/poly_laguerre.tcc:
+
+/usr/include/c++/14/tr1/riemann_zeta.tcc:
+
+/usr/include/c++/14/unordered_set:
+
+/usr/include/c++/14/vector:
+
+/usr/include/x86_64-linux-gnu/bits/sigevent-consts.h:
 
 /usr/include/limits.h:
 
@@ -4162,17 +4312,11 @@ src/movescount/libmovescount.so.0:
 
 /usr/include/linux/close_range.h:
 
-/usr/include/linux/errno.h:
-
 /usr/include/linux/posix_types.h:
 
 /usr/include/linux/types.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringmatcher.h:
-
-/lib/x86_64-linux-gnu/libkrb5support.so.0:
-
-/usr/include/locale.h:
 
 /usr/lib/i386-linux-gnu/libz.so.1:
 
@@ -4192,12 +4336,6 @@ src/movescount/libmovescount.so.0:
 
 /usr/include/x86_64-linux-gnu/bits/environments.h:
 
-/usr/include/c++/14/bits/hashtable.h:
-
-/usr/include/x86_64-linux-gnu/bits/errno.h:
-
-/usr/include/x86_64-linux-gnu/bits/signum-arch.h:
-
 /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
 /usr/include/x86_64-linux-gnu/bits/fp-fast.h:
@@ -4207,10 +4345,6 @@ src/movescount/libmovescount.so.0:
 /usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /lib/i386-linux-gnu/libkrb5.so.3:
-
-/usr/include/x86_64-linux-gnu/bits/posix1_lim.h:
-
-/usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/c++/14/concepts:
 
@@ -4248,9 +4382,9 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/bits/siginfo-consts.h:
 
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qeventloop.h:
 
@@ -4268,23 +4402,11 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/qt5/QtNetwork/QNetworkReply:
 
-/usr/include/x86_64-linux-gnu/bits/ss_flags.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/sig_atomic_t.h:
-
-/usr/include/c++/14/bits/stl_heap.h:
-
-/usr/include/x86_64-linux-gnu/c++/14/bits/c++locale.h:
-
-/usr/include/c++/14/bits/std_thread.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__sigval_t.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtNetwork/qnetworkrequest.h:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatetime.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigevent_t.h:
 
@@ -4312,15 +4434,13 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o:
 
 /usr/lib/linux/uapi/x86/asm/types.h:
 
-/usr/include/x86_64-linux-gnu/c++/14/bits/c++allocator.h:
-
 /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/c++io.h:
 
-/usr/include/features-time64.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/features-time64.h:
 
 /usr/include/x86_64-linux-gnu/c++/14/bits/ctype_base.h:
 
@@ -4396,9 +4516,9 @@ src/unittest/CMakeFiles/unittest.dir/movescount/movescountjson_test.cpp.o:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qflags.h:
 
-/usr/include/c++/14/string:
-
 /usr/include/x86_64-linux-gnu/c++/14/bits/c++config.h:
+
+/usr/include/c++/14/string:
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qgenericatomic.h:
 

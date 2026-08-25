@@ -198,10 +198,24 @@ src/unittest/CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.s: cmake_forc
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.s"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yann/dev/openambit2/src/unittest/movescount/sportmode_test.cpp -o CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.s
 
+src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
+src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o: /home/yann/dev/openambit2/src/unittest/movescount/workout_test.cpp
+src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o"
+	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o -MF CMakeFiles/unittest.dir/movescount/workout_test.cpp.o.d -o CMakeFiles/unittest.dir/movescount/workout_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/movescount/workout_test.cpp
+
+src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/unittest.dir/movescount/workout_test.cpp.i"
+	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yann/dev/openambit2/src/unittest/movescount/workout_test.cpp > CMakeFiles/unittest.dir/movescount/workout_test.cpp.i
+
+src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/unittest.dir/movescount/workout_test.cpp.s"
+	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yann/dev/openambit2/src/unittest/movescount/workout_test.cpp -o CMakeFiles/unittest.dir/movescount/workout_test.cpp.s
+
 src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/crc16_test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o -MF CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/crc16_test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.i: cmake_force
@@ -215,7 +229,7 @@ src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.s: cmake_force
 src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/device_support_test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o -MF CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/device_support_test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.i: cmake_force
@@ -229,7 +243,7 @@ src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.s: cmake_f
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/sport_mode_serialize_test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o -MF CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/sport_mode_serialize_test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.i: cmake_force
@@ -243,7 +257,7 @@ src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.s: c
 src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/custom_modes_bxml_test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o -MF CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/custom_modes_bxml_test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.i: cmake_force
@@ -257,7 +271,7 @@ src/unittest/CMakeFiles/unittest.dir/libambit/custom_modes_bxml_test.cpp.s: cmak
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/sport_mode_validate_test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o -MF CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/sport_mode_validate_test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.i: cmake_force
@@ -271,7 +285,7 @@ src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_validate_test.cpp.s: cm
 src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o: src/unittest/CMakeFiles/unittest.dir/flags.make
 src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o: /home/yann/dev/openambit2/src/unittest/libambit/utils-test.cpp
 src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o: src/unittest/CMakeFiles/unittest.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/unittest && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.o -MF CMakeFiles/unittest.dir/libambit/utils-test.cpp.o.d -o CMakeFiles/unittest.dir/libambit/utils-test.cpp.o -c /home/yann/dev/openambit2/src/unittest/libambit/utils-test.cpp
 
 src/unittest/CMakeFiles/unittest.dir/libambit/utils-test.cpp.i: cmake_force
@@ -293,6 +307,7 @@ unittest_OBJECTS = \
 "CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o" \
 "CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o" \
 "CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o" \
+"CMakeFiles/unittest.dir/movescount/workout_test.cpp.o" \
 "CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o" \
 "CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o" \
 "CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o" \
@@ -312,6 +327,7 @@ src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/movescount/movescoun
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/movescount/movescountlogchecker_test.cpp.o
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o
+src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/libambit/crc16_test.cpp.o
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/libambit/device_support_test.cpp.o
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/libambit/sport_mode_serialize_test.cpp.o
@@ -324,7 +340,7 @@ src/unittest/unittest: src/unittest/../libambit/libambit.so.0
 src/unittest/unittest: src/unittest/../movescount/libmovescount.so.0
 src/unittest/unittest: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.15
 src/unittest/unittest: src/unittest/CMakeFiles/unittest.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable unittest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking CXX executable unittest"
 	cd /home/yann/dev/openambit2/build/src/unittest && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/unittest.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

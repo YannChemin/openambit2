@@ -112,6 +112,12 @@
 			"Mu",
 			"EWIEGA46WW/moc_sportmodegroup.cpp",
 			null
+		],
+		[
+			"/home/yann/dev/openambit2/src/movescount/workout.h",
+			"Mu",
+			"EWIEGA46WW/moc_workout.cpp",
+			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -200,7 +206,8 @@
 			"/home/yann/dev/openambit2/src/movescount/sportmodegroup.cpp",
 			"Mu",
 			null
-		]
+		],
+		[ "/home/yann/dev/openambit2/src/movescount/workout.cpp", "Mu", null ]
 	],
 	"USE_BETTER_GRAPH" : false,
 	"VERBOSITY" : 0

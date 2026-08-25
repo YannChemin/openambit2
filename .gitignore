@@ -1,0 +1,39 @@
+# Out-of-source CMake build directories
+build/
+build-*/
+cmake-build-*/
+
+# Compiled object/library files
+*.o
+*.obj
+*.so
+*.so.*
+*.a
+*.dylib
+*.dll
+*.exe
+
+# CMake artifacts (in case of an accidental in-source build)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+install_manifest.txt
+Makefile
+*.cmake
+!CMakeLists.txt
+
+# Qt-generated files (in-source builds only; out-of-source build/ is already ignored above)
+moc_*.cpp
+ui_*.h
+qrc_*.cpp
+*_autogen/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS cruft
+.DS_Store

@@ -134,10 +134,24 @@ src/movescount/CMakeFiles/movescount.dir/sportmodegroup.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/movescount.dir/sportmodegroup.cpp.s"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yann/dev/openambit2/src/movescount/sportmodegroup.cpp -o CMakeFiles/movescount.dir/sportmodegroup.cpp.s
 
+src/movescount/CMakeFiles/movescount.dir/workout.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
+src/movescount/CMakeFiles/movescount.dir/workout.cpp.o: /home/yann/dev/openambit2/src/movescount/workout.cpp
+src/movescount/CMakeFiles/movescount.dir/workout.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/movescount/CMakeFiles/movescount.dir/workout.cpp.o"
+	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/workout.cpp.o -MF CMakeFiles/movescount.dir/workout.cpp.o.d -o CMakeFiles/movescount.dir/workout.cpp.o -c /home/yann/dev/openambit2/src/movescount/workout.cpp
+
+src/movescount/CMakeFiles/movescount.dir/workout.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/movescount.dir/workout.cpp.i"
+	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/yann/dev/openambit2/src/movescount/workout.cpp > CMakeFiles/movescount.dir/workout.cpp.i
+
+src/movescount/CMakeFiles/movescount.dir/workout.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/movescount.dir/workout.cpp.s"
+	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/yann/dev/openambit2/src/movescount/workout.cpp -o CMakeFiles/movescount.dir/workout.cpp.s
+
 src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o: /home/yann/dev/openambit2/src/movescount/movescountsettings.cpp
 src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o -MF CMakeFiles/movescount.dir/movescountsettings.cpp.o.d -o CMakeFiles/movescount.dir/movescountsettings.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescountsettings.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.i: cmake_force
@@ -151,7 +165,7 @@ src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o: /home/yann/dev/openambit2/src/movescount/logentry.cpp
 src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o -MF CMakeFiles/movescount.dir/logentry.cpp.o.d -o CMakeFiles/movescount.dir/logentry.cpp.o -c /home/yann/dev/openambit2/src/movescount/logentry.cpp
 
 src/movescount/CMakeFiles/movescount.dir/logentry.cpp.i: cmake_force
@@ -165,7 +179,7 @@ src/movescount/CMakeFiles/movescount.dir/logentry.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o: /home/yann/dev/openambit2/src/movescount/logstore.cpp
 src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o -MF CMakeFiles/movescount.dir/logstore.cpp.o.d -o CMakeFiles/movescount.dir/logstore.cpp.o -c /home/yann/dev/openambit2/src/movescount/logstore.cpp
 
 src/movescount/CMakeFiles/movescount.dir/logstore.cpp.i: cmake_force
@@ -179,7 +193,7 @@ src/movescount/CMakeFiles/movescount.dir/logstore.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o: /home/yann/dev/openambit2/src/movescount/movescount.cpp
 src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescount.cpp.o -MF CMakeFiles/movescount.dir/movescount.cpp.o.d -o CMakeFiles/movescount.dir/movescount.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescount.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescount.cpp.i: cmake_force
@@ -193,7 +207,7 @@ src/movescount/CMakeFiles/movescount.dir/movescount.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o: /home/yann/dev/openambit2/src/movescount/movescountjson.cpp
 src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.o -MF CMakeFiles/movescount.dir/movescountjson.cpp.o.d -o CMakeFiles/movescount.dir/movescountjson.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescountjson.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.i: cmake_force
@@ -207,7 +221,7 @@ src/movescount/CMakeFiles/movescount.dir/movescountjson.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o: /home/yann/dev/openambit2/src/movescount/movescountlogdirentry.cpp
 src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o -MF CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o.d -o CMakeFiles/movescount.dir/movescountlogdirentry.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescountlogdirentry.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.i: cmake_force
@@ -221,7 +235,7 @@ src/movescount/CMakeFiles/movescount.dir/movescountlogdirentry.cpp.s: cmake_forc
 src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o: /home/yann/dev/openambit2/src/movescount/movescountxml.cpp
 src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.o -MF CMakeFiles/movescount.dir/movescountxml.cpp.o.d -o CMakeFiles/movescount.dir/movescountxml.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescountxml.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.i: cmake_force
@@ -235,7 +249,7 @@ src/movescount/CMakeFiles/movescount.dir/movescountxml.cpp.s: cmake_force
 src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o: src/movescount/CMakeFiles/movescount.dir/flags.make
 src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o: /home/yann/dev/openambit2/src/movescount/movescountlogchecker.cpp
 src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o: src/movescount/CMakeFiles/movescount.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o"
 	cd /home/yann/dev/openambit2/build/src/movescount && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.o -MF CMakeFiles/movescount.dir/movescountlogchecker.cpp.o.d -o CMakeFiles/movescount.dir/movescountlogchecker.cpp.o -c /home/yann/dev/openambit2/src/movescount/movescountlogchecker.cpp
 
 src/movescount/CMakeFiles/movescount.dir/movescountlogchecker.cpp.i: cmake_force
@@ -252,6 +266,7 @@ movescount_OBJECTS = \
 "CMakeFiles/movescount.dir/deviceinfo.cpp.o" \
 "CMakeFiles/movescount.dir/sportmode.cpp.o" \
 "CMakeFiles/movescount.dir/sportmodegroup.cpp.o" \
+"CMakeFiles/movescount.dir/workout.cpp.o" \
 "CMakeFiles/movescount.dir/movescountsettings.cpp.o" \
 "CMakeFiles/movescount.dir/logentry.cpp.o" \
 "CMakeFiles/movescount.dir/logstore.cpp.o" \
@@ -268,6 +283,7 @@ src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/deviceinfo.cpp.o
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/sportmode.cpp.o
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/sportmodegroup.cpp.o
+src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/workout.cpp.o
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/movescountsettings.cpp.o
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/logentry.cpp.o
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/logstore.cpp.o
@@ -283,7 +299,7 @@ src/movescount/libmovescount.so.0.3.0: /usr/lib/x86_64-linux-gnu/libz.so
 src/movescount/libmovescount.so.0.3.0: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.15.15
 src/movescount/libmovescount.so.0.3.0: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.15
 src/movescount/libmovescount.so.0.3.0: src/movescount/CMakeFiles/movescount.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX shared library libmovescount.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/yann/dev/openambit2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX shared library libmovescount.so"
 	cd /home/yann/dev/openambit2/build/src/movescount && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/movescount.dir/link.txt --verbose=$(VERBOSE)
 	cd /home/yann/dev/openambit2/build/src/movescount && $(CMAKE_COMMAND) -E cmake_symlink_library libmovescount.so.0.3.0 libmovescount.so.0 libmovescount.so
 

@@ -25,6 +25,8 @@ movescount_autogen/timestamp: \
 	/home/yann/dev/openambit2/src/movescount/sportmode.h \
 	/home/yann/dev/openambit2/src/movescount/sportmodegroup.cpp \
 	/home/yann/dev/openambit2/src/movescount/sportmodegroup.h \
+	/home/yann/dev/openambit2/src/movescount/workout.cpp \
+	/home/yann/dev/openambit2/src/movescount/workout.h \
 	/home/yann/dev/openambit2/src/openambit/cmake/Findlibambit.cmake \
 	/usr/include/alloca.h \
 	/usr/include/asm-generic/bitsperlong.h \

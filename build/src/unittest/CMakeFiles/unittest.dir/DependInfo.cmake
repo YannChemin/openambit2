@@ -23,6 +23,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/yann/dev/openambit2/src/unittest/movescount/movescountsettings_test.cpp" "src/unittest/CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o" "gcc" "src/unittest/CMakeFiles/unittest.dir/movescount/movescountsettings_test.cpp.o.d"
   "/home/yann/dev/openambit2/src/unittest/movescount/movescountxml_test.cpp" "src/unittest/CMakeFiles/unittest.dir/movescount/movescountxml_test.cpp.o" "gcc" "src/unittest/CMakeFiles/unittest.dir/movescount/movescountxml_test.cpp.o.d"
   "/home/yann/dev/openambit2/src/unittest/movescount/sportmode_test.cpp" "src/unittest/CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o" "gcc" "src/unittest/CMakeFiles/unittest.dir/movescount/sportmode_test.cpp.o.d"
+  "/home/yann/dev/openambit2/src/unittest/movescount/workout_test.cpp" "src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o" "gcc" "src/unittest/CMakeFiles/unittest.dir/movescount/workout_test.cpp.o.d"
   "" "src/unittest/unittest" "gcc" "src/unittest/CMakeFiles/unittest.dir/link.d"
   )
 
