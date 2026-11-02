@@ -41,9 +41,12 @@ link_directories(
 )
 
 set(openambit_HDRS
+  activitycategory.h
   confirmbetadialog.h
+  copernicusdem.h
   devicemanager.h
   geojsonexporter.h
+  i18n.h
   logview.h
   mainwindow.h
   mapview.h
@@ -60,9 +63,12 @@ set(openambit_HDRS
 )
 
 set(openambit_SRCS
+  activitycategory.cpp
   confirmbetadialog.cpp
+  copernicusdem.cpp
   devicemanager.cpp
   geojsonexporter.cpp
+  i18n.cpp
   logview.cpp
   main.cpp
   mainwindow.cpp

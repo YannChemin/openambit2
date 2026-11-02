@@ -28,6 +28,7 @@ signals:
 private slots:
     void onModeSelected(int row);
     void onAddMode();
+    void addMode(QVariantMap mode);
     void onRemoveMode();
     void onWriteToWatch();
     void onLoadDefaults();

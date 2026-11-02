@@ -16,6 +16,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QLabel>
+#include <QMenu>
 
 static const int GPS_INTERVALS[]   = {0, 1, 2, 5, 10, 15, 30, 60};
 static const int GPS_INTERVAL_COUNT = 8;
@@ -29,6 +30,15 @@ SportModeEditorWidget::SportModeEditorWidget(QWidget *parent)
     m_list = new QListWidget;
     m_addBtn    = new QPushButton(tr("Add"));
     m_removeBtn = new QPushButton(tr("Remove"));
+
+    // "Add" offers a blank mode or a ready-made air sports template
+    QMenu *addMenu = new QMenu(m_addBtn);
+    addMenu->addAction(tr("Blank mode"), this, &SportModeEditorWidget::onAddMode);
+    QMenu *airMenu = addMenu->addMenu(tr("Air sports"));
+    for (const QVariantMap &preset : SportModeStorage::airSportPresets()) {
+        airMenu->addAction(preset.value("Name").toString(), this, [this, preset]() { addMode(preset); });
+    }
+    m_addBtn->setMenu(addMenu);
 
     QHBoxLayout *listBtns = new QHBoxLayout;
     listBtns->addWidget(m_addBtn);
@@ -148,7 +158,6 @@ SportModeEditorWidget::SportModeEditorWidget(QWidget *parent)
     setFormEnabled(false);
 
     connect(m_list, &QListWidget::currentRowChanged, this, &SportModeEditorWidget::onModeSelected);
-    connect(m_addBtn,    &QPushButton::clicked, this, &SportModeEditorWidget::onAddMode);
     connect(m_removeBtn, &QPushButton::clicked, this, &SportModeEditorWidget::onRemoveMode);
     connect(m_writeBtn,    &QPushButton::clicked, this, &SportModeEditorWidget::onWriteToWatch);
     connect(m_defaultsBtn, &QPushButton::clicked, this, &SportModeEditorWidget::onLoadDefaults);
@@ -303,20 +312,24 @@ void SportModeEditorWidget::setFormEnabled(bool enabled)
 
 void SportModeEditorWidget::onAddMode()
 {
+    QVariantMap nm = SportModeStorage::factoryDefaults().first();
+    nm["Name"] = tr("New Mode");
+    addMode(nm);
+}
+
+void SportModeEditorWidget::addMode(QVariantMap mode)
+{
     if (m_currentRow >= 0 && m_currentRow < m_modes.size())
         saveCurrentForm();
 
     int nextId = 1;
     for (const QVariantMap &m : m_modes)
         nextId = qMax(nextId, m.value("CustomModeID", 0).toInt() + 1);
-
-    QVariantMap nm = SportModeStorage::factoryDefaults().first();
-    nm["Name"]         = tr("New Mode");
-    nm["CustomModeID"] = nextId;
-    m_modes.append(nm);
+    mode["CustomModeID"] = nextId;
+    m_modes.append(mode);
 
     m_loading = true;
-    m_list->addItem(nm["Name"].toString());
+    m_list->addItem(mode["Name"].toString());
     m_loading = false;
     m_list->setCurrentRow(m_modes.size() - 1);
 }

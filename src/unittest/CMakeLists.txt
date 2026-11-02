@@ -16,6 +16,7 @@ ELSE (!WIN32)
 set(UDEV_LIBS "")
 ENDIF (!WIN32)
 find_package(Qt5Core REQUIRED)
+find_package(Qt5Network REQUIRED)
 
 include(GNUInstallDirs)
 
@@ -55,11 +56,22 @@ set(TEST_SRCS
         libambit/sport_mode_serialize_test.cpp
         libambit/custom_modes_bxml_test.cpp
         libambit/apps_directory_test.cpp
+        libambit/training_program_test.cpp
         libambit/sport_mode_validate_test.cpp
-        libambit/utils-test.cpp)
+        libambit/utils-test.cpp
+
+        # openambit (the Qt Core parts that need no window)
+        openambit/activitycategory_test.cpp
+        openambit/copernicusdem_test.cpp
+        openambit/i18n_test.cpp
+        ../openambit/activitycategory.cpp
+        ../openambit/copernicusdem.cpp
+        ../openambit/i18n.cpp)
+
+set(CMAKE_AUTOMOC ON)
 
 add_definitions(-DAPP_VERSION="${OPENAMBIT_VERSION}")
 
 add_executable(unittest ${TEST_HDRS} ${TEST_SRCS})
 
-target_link_libraries(unittest ${LIBAMBIT_LIBS} ${MOVESCOUNT_LIBS} ${UDEV_LIBS} Qt5::Core )
+target_link_libraries(unittest ${LIBAMBIT_LIBS} ${MOVESCOUNT_LIBS} ${UDEV_LIBS} Qt5::Core Qt5::Network )

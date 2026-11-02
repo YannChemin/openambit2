@@ -26,6 +26,8 @@
 #include <stdbool.h>
 #include <time.h>
 
+#include "training_program.h"
+
 #ifdef __cplusplus /* If this is a C++ compiler, use C linkage */
 extern "C" {
 #endif
@@ -922,6 +924,27 @@ ambit_app_rules_t *liblibambit_malloc_app_rules(void);
  * \return true if allocation was succesfull.
  */
 bool libambit_malloc_app_rule(uint16_t count, ambit_app_rules_t *ambit_app_rules);
+
+/**
+ * Writes a native "planned move" program to the device's TrainingProgram flash region -
+ * Ambit3-family only, hardware-confirmed (see training_program.h's own header comment for
+ * full provenance). Unlike sport_mode_write()/app_data_write(), this needs no App Zone
+ * bytecode or external compiler: the watch's own firmware reads this format directly and
+ * shows a planned move on its native "Today" (TIME mode -> [Next]) screen.
+ * \param object
+ * \param program the program to write (validated internally - see
+ *        ambit_training_program_encode()'s own doc comment for what's rejected)
+ * \return 0 on success, -1 on failure or if the device doesn't support this (e.g. legacy
+ *         Ambit/Ambit2, which has no TrainingProgram region)
+ */
+int libambit_training_program_write(ambit_object_t *object, const ambit_training_program_t *program);
+
+/**
+ * Reads the device's current TrainingProgram region and decodes it.
+ * \return 0 on success (including a validly-empty "no program set" region, see
+ *         ambit_training_program_decode()'s own doc comment), -1 on failure/unsupported
+ */
+int libambit_training_program_read(ambit_object_t *object, ambit_training_program_t *program);
 
 #ifdef __cplusplus /* If this is a C++ compiler, end C linkage */
 }

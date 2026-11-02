@@ -122,6 +122,20 @@
                 </property>
                </widget>
               </item>
+              <item row="2" column="0">
+               <layout class="QHBoxLayout" name="hLayoutLanguage">
+                <item>
+                 <widget class="QLabel" name="labelLanguage">
+                  <property name="text">
+                   <string>Language (applied at next start):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBoxLanguage"/>
+                </item>
+               </layout>
+              </item>
              </layout>
             </widget>
            </item>

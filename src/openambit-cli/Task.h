@@ -27,6 +27,14 @@ public:
 
     void hasError();
 
+    // Offline operations, which need no Movescount account: the device status
+    // as one JSON line, then writes from the files the desktop application keeps
+    // in ~/.openambit (GPS orbit, sport modes, training plan).
+    bool infoJson = false;
+    QString orbitFile;
+    QString sportModesFile;
+    QString trainingPlanFile;
+
 public slots:
     void run();
     void error(QByteArray data);

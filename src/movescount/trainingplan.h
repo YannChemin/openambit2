@@ -34,14 +34,27 @@
  * large, the compiler website will report COMPILATION_FAILED/BINARY_TOO_LARGE when the user
  * pastes it in, and they'll need to manually split that entry into its own plan.
  *
- * ALSO NOT YET DONE: actually writing a compiled app onto the watch and wiring it into a
- * sport mode's display (sommet's tools/workout_install.py) requires porting a second,
- * separate binary format - the real Apps flash-region directory layout, which differs from
- * (and was only reverse-engineered after) the simpler format openambit2's own
- * sport_mode_serialize.c currently implements for app_data_write(). That is real,
- * hardware-risk-bearing work of similar scope to the CustomModes format port earlier in this
- * plan, and has not been attempted here - this file only builds and saves the packed App
- * Zone sources/compiled-app files; see TrainingPlanStorage for where those are kept.
+ * TWO WAYS TO SCHEDULE A PLAN, pick per use case - see buildNativeProgram() vs. packPlan():
+ *
+ * 1. NATIVE (buildNativeProgram(), training_program.h) - hardware-confirmed by sommet
+ *    2026-09-03, no App Zone bytecode or external compiler at all. Writes a flat list of
+ *    planned-move records (name/duration/distance/activityId/date) that the watch's own
+ *    firmware reads directly and shows on its native "Today" screen. Prefer this for the
+ *    common case of "remind me I have a run planned today" - it is simpler, needs no manual
+ *    compile step, and libambit_training_program_write() can write it straight to the watch.
+ *    Limitation: one flat record per entry, no multi-step interval structure, no live
+ *    target-range alerting, no countdown display of its own, max 60 entries.
+ *
+ * 2. APP ZONE (packPlan()) - the only way to schedule a REAL multi-phase interval workout
+ *    (warmup/interval/recovery/cooldown with target ranges), but needs the manual compiler
+ *    hand-off below, and whether a compiled app's logic actually executes on real firmware
+ *    (as opposed to being accepted/displayed) is still unverified - see AppZoneGenerator's
+ *    own header comment. Also still missing: wiring an installed app into a sport mode's
+ *    display (sommet's tools/workout_install.py) needs a second binary format - the real
+ *    Apps flash-region directory (already ported, see apps_directory.h) - PLUS the
+ *    CustomModes-side RULES/DISP_FIELD_SHORTCUT wiring to actually attach it to a display,
+ *    which is not built here; this file only builds and saves the packed App Zone sources/
+ *    compiled-app files, see TrainingPlanStorage for where those are kept.
  */
 #ifndef TRAININGPLAN_H
 #define TRAININGPLAN_H
@@ -52,6 +65,7 @@
 #include <QVariantMap>
 
 #include "workout.h"
+#include "training_program.h"
 
 class TrainingPlanEntry
 {
@@ -119,8 +133,25 @@ public:
      */
     static QList<TrainingPlanPack> packPlan(const TrainingPlan &plan, QString &errorString);
 
+    /**
+     * Builds a native ambit_training_program_t from \a plan - see this file's own header
+     * comment for how this differs from packPlan()/the App Zone path. Each entry becomes one
+     * flat item: duration_minutes is the sum of its workout's expanded "time" steps (repeats
+     * unrolled, seconds rounded up to whole minutes), distance the sum of its "distance"
+     * steps, intensity a fixed default (3 - this project's Workout model has no per-entry
+     * intensity field), and activityId resolved from the workout's name against a small table
+     * of common sports (falling back to 3/Running) - deliberately simple, unlike sommet's own
+     * resolution against a live watch's real CustomModes names, which needs a connected device
+     * this function doesn't take. base_date is the earliest entry's calendar date; every
+     * item's day_offset is its own date minus that base date, in days.
+     * \return false (with \a errorString set) if the plan has no entries, if it has more than
+     *         TRAINING_PROGRAM_MAX_ITEMS entries, or if any entry's workout fails to expand
+     */
+    static bool buildNativeProgram(const TrainingPlan &plan, ambit_training_program_t &out, QString &errorString);
+
 private:
     static QString indent(const QString &source, const QString &prefix = "\t");
+    static int resolveActivityId(const QString &workoutName);
 };
 
 #endif // TRAININGPLAN_H

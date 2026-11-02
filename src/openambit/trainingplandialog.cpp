@@ -39,12 +39,20 @@ TrainingPlanDialog::TrainingPlanDialog(QWidget *parent)
     setWindowTitle(tr("Training Plan Builder (experimental)"));
     resize(1100, 750);
 
+    QLabel *nativeInfo = new QLabel(tr(
+        "<b>Write to Watch</b> below sends your plan straight to the watch's native "
+        "\"Today\" reminder screen - hardware-confirmed, no compiler needed. It has no "
+        "multi-step interval structure or live target alerts though: just a name, date, "
+        "duration/distance and activity per entry (max 60 entries)."));
+    nativeInfo->setWordWrap(true);
+    nativeInfo->setStyleSheet("QLabel { background: #d1e7dd; color: #0f5132; padding: 6px; border: 1px solid #badbcc; }");
+
     QLabel *warning = new QLabel(tr(
-        "<b>Experimental:</b> this schedules workouts as date-gated App Zone apps (the watch "
-        "shows a countdown until each planned date, then runs that day's workout). Whether a "
-        "compiled app actually executes on real Ambit3-family firmware is unverified - and "
-        "writing a compiled app onto the watch is not implemented in this dialog at all yet; "
-        "it only generates sources for you to compile and save."));
+        "<b>Experimental (App Zone path below):</b> packing/generating sources schedules "
+        "workouts as date-gated App Zone apps with real multi-step interval structure and "
+        "live target alerts, but needs a manual compile step and whether a compiled app "
+        "actually executes its logic on real Ambit3-family firmware is unverified. Prefer "
+        "\"Write to Watch\" above for simple planned-workout reminders."));
     warning->setWordWrap(true);
     warning->setStyleSheet("QLabel { background: #fff3cd; color: #664d03; padding: 6px; border: 1px solid #ffe69c; }");
 
@@ -176,6 +184,8 @@ TrainingPlanDialog::TrainingPlanDialog(QWidget *parent)
     middlePanel->setLayout(middleLayout);
 
     // --- Right: pack & compile hand-off ---
+    m_writeNativeBtn = new QPushButton(tr("Write to Watch (Native)"));
+
     m_packBtn = new QPushButton(tr("Pack && Generate Sources"));
     m_packList = new QListWidget;
     m_sourceView = new QPlainTextEdit;
@@ -217,8 +227,13 @@ TrainingPlanDialog::TrainingPlanDialog(QWidget *parent)
     splitter->setStretchFactor(2, 1);
 
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
-    mainLayout->addWidget(warning);
+    mainLayout->addWidget(nativeInfo);
     mainLayout->addLayout(nameForm);
+    QHBoxLayout *nativeWriteRow = new QHBoxLayout;
+    nativeWriteRow->addWidget(m_writeNativeBtn);
+    nativeWriteRow->addStretch();
+    mainLayout->addLayout(nativeWriteRow);
+    mainLayout->addWidget(warning);
     mainLayout->addWidget(splitter, 1);
 
     setEntryFormEnabled(false);
@@ -237,6 +252,7 @@ TrainingPlanDialog::TrainingPlanDialog(QWidget *parent)
     connect(m_removeStepBtn, &QPushButton::clicked, this, &TrainingPlanDialog::onRemoveStep);
     connect(m_stepType, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &TrainingPlanDialog::onStepTypeChanged);
 
+    connect(m_writeNativeBtn, &QPushButton::clicked, this, &TrainingPlanDialog::onWriteToWatchNative);
     connect(m_packBtn, &QPushButton::clicked, this, &TrainingPlanDialog::onPackAndGenerate);
     connect(m_packList, &QListWidget::currentRowChanged, this, &TrainingPlanDialog::onPackSelected);
     connect(m_copyBtn, &QPushButton::clicked, this, &TrainingPlanDialog::onCopySourceToClipboard);
@@ -566,6 +582,40 @@ void TrainingPlanDialog::saveCurrentStepForm()
 }
 
 /* ============================================================ packing / compile hand-off ============================================================ */
+
+void TrainingPlanDialog::onWriteToWatchNative()
+{
+    saveCurrentEntryForm();
+
+    TrainingPlan plan;
+    plan.name = m_planName->text().trimmed().isEmpty() ? tr("My training plan") : m_planName->text().trimmed();
+    plan.entries = m_entries;
+
+    ambit_training_program_t program;
+    QString error;
+    if (!TrainingPlanScheduler::buildNativeProgram(plan, program, error)) {
+        QMessageBox::warning(this, tr("Could not build program"), error);
+        return;
+    }
+
+    QStringList preview;
+    for (int i = 0; i < program.items_count; i++) {
+        const ambit_training_program_item_t &item = program.items[i];
+        preview << tr("%1: \"%2\" (%3 min%4)")
+                       .arg(m_entries[i].date, QString::fromUtf8(item.name))
+                       .arg(item.duration_minutes)
+                       .arg(item.distance > 0 ? tr(", %1 m").arg(item.distance) : QString());
+    }
+
+    QMessageBox::StandardButton reply = QMessageBox::question(this, tr("Write to Watch?"),
+        tr("This will REPLACE the watch's current TrainingProgram with:\n\n%1\n\nContinue?").arg(preview.join("\n")),
+        QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (reply != QMessageBox::Yes) {
+        return;
+    }
+
+    emit writeToWatchRequested(plan.toMap());
+}
 
 void TrainingPlanDialog::onPackAndGenerate()
 {

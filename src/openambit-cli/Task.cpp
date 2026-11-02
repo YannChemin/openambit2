@@ -7,7 +7,12 @@
 #include <movescount/movescount.h>
 #include <movescount/logstore.h>
 #include <movescount/movescountxml.h>
+#include <movescount/sportmode.h>
+#include <movescount/trainingplan.h>
 #include <libambit_int.h>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 #define APPKEY                 "DbCBVqja20NKdrimBHQxtYIdczUJ56WHIWlC6A7vp6NPC0D0a8wA5d0ODyywFKe6"
 #define MOVESCOUNT_DEFAULT_URL "https://uiservices.movescount.com/"
@@ -19,6 +24,8 @@ void startSync(ambit_object_t *deviceObject, ambit_personal_settings_t *currentP
                Task *task);
 static int log_skip_cb(void *ambit_object, ambit_log_header_t *log_header);
 static void log_data_cb(void *object, ambit_log_entry_t *log_entry);
+static void log_progress_cb(void *object, uint16_t log_count, uint16_t log_current, uint8_t progress_percent);
+static void runOfflineWrites(ambit_object_t *deviceObject, Task *task);
 
 int readSportModesFromFile(const char *file, ambit_sport_mode_device_settings_t *ambitDeviceSettings);
 int readAppsFromFile(const char *file, ambit_app_rules_t* ambitApps);
@@ -80,7 +87,19 @@ void Task::run() {
                 hasError();
             }
 
-            if (0 != info->access_status || !info->is_supported) {
+            if (infoJson) {
+                QJsonObject o;
+                o["name"] = QString::fromUtf8(info->name);
+                o["model"] = QString::fromUtf8(info->model);
+                o["serial"] = QString::fromUtf8(info->serial);
+                o["fw_version"] = QString("%1.%2.%3").arg(info->fw_version[0]).arg(info->fw_version[1])
+                                      .arg((info->fw_version[2] << 0) | (info->fw_version[3] << 8));
+                o["hw_version"] = QString("%1.%2.%3").arg(info->hw_version[0]).arg(info->hw_version[1])
+                                      .arg((info->hw_version[2] << 0) | (info->hw_version[3] << 8));
+                o["supported"] = (bool)info->is_supported;
+                o["charge"] = (int)status.charge;
+                printf("INFO %s\n", QJsonDocument(o).toJson(QJsonDocument::Compact).constData());
+            } else if (0 != info->access_status || !info->is_supported) {
                 printf("ERROR: Device not supported\n");
 
                 hasError();
@@ -237,7 +256,7 @@ void startSync(ambit_object_t *deviceObject, ambit_personal_settings_t *currentP
                 syncData.syncMovescount = writeLogs;
                 syncData.movesCount = movesCount;
 
-                res = libambit_log_read(deviceObject, &log_skip_cb, &log_data_cb, NULL, &syncData);
+                res = libambit_log_read(deviceObject, &log_skip_cb, &log_data_cb, &log_progress_cb, &syncData);
                 if (res == -1) {
                     qDebug() << "ERROR: Failed to read logs";
 
@@ -363,6 +382,8 @@ void startSync(ambit_object_t *deviceObject, ambit_personal_settings_t *currentP
             qDebug() << "End orbit data sync";
         }
 
+        runOfflineWrites(deviceObject, task);
+
         if (writeSettingsJSON) {
             qDebug() << "Start sync watch apps to JSON";
 
@@ -476,5 +497,99 @@ static void log_data_cb(void *object, ambit_log_entry_t *log_entry)
 	    libambit_log_synced(syncData->deviceObject, log_entry);
 	
         delete entry;
+    }
+}
+
+static void log_progress_cb(void *object, uint16_t log_count, uint16_t log_current, uint8_t progress_percent)
+{
+    Q_UNUSED(object)
+    // One line per step, for front ends that show the download progress
+    printf("PROGRESS %d %d %d\n", log_current, log_count, progress_percent);
+}
+
+static bool readJsonFile(const QString &path, QJsonDocument &doc)
+{
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly)) {
+        printf("ERROR: Cannot open '%s'\n", path.toUtf8().constData());
+        return false;
+    }
+    QJsonParseError err;
+    doc = QJsonDocument::fromJson(f.readAll(), &err);
+    if (err.error != QJsonParseError::NoError) {
+        printf("ERROR: '%s' is not valid JSON: %s\n", path.toUtf8().constData(), err.errorString().toUtf8().constData());
+        return false;
+    }
+    return true;
+}
+
+// The same writes as the desktop application's DeviceManager, from its files
+static void runOfflineWrites(ambit_object_t *deviceObject, Task *task)
+{
+    if (!task->sportModesFile.isEmpty()) {
+        QJsonDocument doc;
+        if (!readJsonFile(task->sportModesFile, doc) || !doc.isArray()) {
+            printf("ERROR: Sport modes file must hold a JSON array of modes\n");
+            task->hasError();
+        } else {
+            QJsonArray modes = doc.array();
+            ambit_sport_mode_device_settings_t *settings = libambit_malloc_sport_mode_device_settings();
+            int res = -1;
+            if (settings && libambit_malloc_sport_modes(modes.count(), settings)) {
+                ambit_sport_mode_t *slot = settings->sport_modes;
+                for (const QJsonValue &v : modes) {
+                    QVariantMap map = v.toObject().toVariantMap();
+                    CustomMode cm(map);
+                    cm.toAmbitCustomModeData(slot, settings);
+                    slot++;
+                }
+                res = libambit_sport_mode_write(deviceObject, settings);
+            }
+            if (settings)
+                libambit_sport_mode_device_settings_free(settings);
+            if (res == 0) {
+                printf("DONE sport-modes %d\n", (int)modes.count());
+            } else {
+                printf("ERROR: Failed to write sport modes\n");
+                task->hasError();
+            }
+        }
+    }
+
+    if (!task->trainingPlanFile.isEmpty()) {
+        QJsonDocument doc;
+        if (!readJsonFile(task->trainingPlanFile, doc) || !doc.isObject()) {
+            printf("ERROR: Training plan file must hold one JSON plan object\n");
+            task->hasError();
+        } else {
+            TrainingPlan plan(doc.object().toVariantMap());
+            ambit_training_program_t program;
+            QString error;
+            if (!TrainingPlanScheduler::buildNativeProgram(plan, program, error)) {
+                printf("ERROR: Invalid training plan: %s\n", error.toUtf8().constData());
+                task->hasError();
+            } else if (libambit_training_program_write(deviceObject, &program) != 0) {
+                printf("ERROR: The watch rejected the training program\n");
+                task->hasError();
+            } else {
+                printf("DONE training-plan\n");
+            }
+        }
+    }
+
+    if (!task->orbitFile.isEmpty()) {
+        QFile f(task->orbitFile);
+        QByteArray data;
+        if (f.open(QIODevice::ReadOnly))
+            data = f.readAll();
+        if (data.isEmpty()) {
+            printf("ERROR: Cannot read orbit file '%s'\n", task->orbitFile.toUtf8().constData());
+            task->hasError();
+        } else if (libambit_gps_orbit_write(deviceObject, (uint8_t *)data.data(), data.size()) != 0) {
+            printf("ERROR: Failed to write orbit data\n");
+            task->hasError();
+        } else {
+            printf("DONE orbit %d\n", (int)data.size());
+        }
     }
 }

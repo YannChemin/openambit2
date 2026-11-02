@@ -85,8 +85,30 @@ int main(int argc, char *argv[]) {
                                               QCoreApplication::translate("main", "Run a check for missing uploads to movescount for moves that were downloaded from the watch previously, but not uploaded properly."));
     parser.addOption(checkForMissingUploads);
 
+    QCommandLineOption infoJsonOption(QStringList() << "info-json",
+                                      QCoreApplication::translate("main", "Print the device information and charge as one JSON line (INFO {...}) and stop."));
+    parser.addOption(infoJsonOption);
+
+    QCommandLineOption orbitFileOption(QStringList() << "orbit-file",
+                                       QCoreApplication::translate("main", "Write the GPS orbit data from this file (e.g. ~/.openambit/orbit_cache.uo) to the watch."),
+                                       QCoreApplication::translate("main", "file"));
+    parser.addOption(orbitFileOption);
+
+    QCommandLineOption sportModesOption(QStringList() << "sport-modes",
+                                        QCoreApplication::translate("main", "Write the sport modes of this JSON file (the format of ~/.openambit/sport_modes.json) to the watch."),
+                                        QCoreApplication::translate("main", "json-file"));
+    parser.addOption(sportModesOption);
+
+    QCommandLineOption trainingPlanOption(QStringList() << "training-plan",
+                                          QCoreApplication::translate("main", "Write the training plan of this JSON file (one plan of ~/.openambit/training_plans.json) to the watch."),
+                                          QCoreApplication::translate("main", "json-file"));
+    parser.addOption(trainingPlanOption);
+
     // Process the actual command line arguments given by the user
     parser.process(a);
+
+    // Front ends read the output line by line while it runs
+    setvbuf(stdout, NULL, _IOLBF, 0);
 
     const QStringList args = parser.positionalArguments();
     // source is args.at(0), destination is args.at(1)
@@ -133,6 +155,11 @@ int main(int argc, char *argv[]) {
             customConfig.length() == 0 ? NULL : customConfigStr.c_str(),
             customAppConfig.length() == 0 ? NULL : customAppConfigStr.c_str(),
             parser.isSet(checkForMissingUploads));
+
+    task->infoJson = parser.isSet(infoJsonOption);
+    task->orbitFile = parser.value(orbitFileOption);
+    task->sportModesFile = parser.value(sportModesOption);
+    task->trainingPlanFile = parser.value(trainingPlanOption);
 
     // make application stop when the task is done
     QObject::connect(task, SIGNAL(finished()), &a, SLOT(quit()));

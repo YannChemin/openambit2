@@ -30,6 +30,7 @@
 #include "sport_mode_serialize.h"
 #include "custom_modes_bxml.h"
 #include "apps_directory.h"
+#include "training_program.h"
 #include "utils.h"
 #include "debug.h"
 
@@ -121,6 +122,8 @@ static int log_synced(ambit_object_t *object, ambit_log_entry_t *log_entry);
 static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
 static int flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash);
 static int memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions);
+static int training_program_write(ambit_object_t *object, const ambit_training_program_t *program);
+static int training_program_read(ambit_object_t *object, ambit_training_program_t *program);
 
 /*
  * Global variables
@@ -142,7 +145,9 @@ ambit_device_driver_t ambit_device_driver_ambit3 = {
     log_synced,
     flash_read,
     flash_write,
-    memory_map_get
+    memory_map_get,
+    training_program_write,
+    training_program_read
 };
 
 
@@ -1114,6 +1119,86 @@ static int flash_read(ambit_object_t *object, uint32_t address, uint32_t length,
 static int flash_write(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash)
 {
     return libambit_pmem20_data_write_addr(&object->driver_data->pmem20, address, data, length, include_sha256_hash);
+}
+
+/**
+ * Writes a native TrainingProgram - see libambit_training_program_write()'s doc comment in
+ * libambit.h. Unlike sport_mode_write()/app_data_write(), this is a plain encode-and-write:
+ * the format has no existing-content merge concept (a write always replaces the whole
+ * program), so there is no read-modify-write step here.
+ */
+static int training_program_write(ambit_object_t *object, const ambit_training_program_t *program)
+{
+    uint8_t *encoded;
+    uint32_t region_size, encoded_len;
+    int ret;
+
+    if (object->driver_data->memory_maps.initialized == 0 && get_memory_maps(object) != 0) {
+        LOG_WARNING("Failed to read memory map, cannot locate TrainingProgram region");
+        return -1;
+    }
+
+    region_size = object->driver_data->memory_maps.training_program.size;
+    if (region_size == 0) {
+        LOG_WARNING("Device did not report a TrainingProgram memory region");
+        return -1;
+    }
+
+    encoded = (uint8_t*)malloc(region_size);
+    if (encoded == NULL) {
+        LOG_ERROR("Could not allocate memory for training_program_write");
+        return -1;
+    }
+
+    if (ambit_training_program_encode(program, encoded, region_size, &encoded_len) != 0) {
+        LOG_ERROR("training_program_write: encoded program does not fit in the device's %u-byte region", region_size);
+        free(encoded);
+        return -1;
+    }
+
+    ret = libambit_pmem20_data_write_addr(&object->driver_data->pmem20,
+                                           object->driver_data->memory_maps.training_program.start,
+                                           encoded, encoded_len, true);
+
+    free(encoded);
+
+    return ret;
+}
+
+static int training_program_read(ambit_object_t *object, ambit_training_program_t *program)
+{
+    uint8_t *live;
+    uint32_t region_size;
+    int ret;
+
+    if (object->driver_data->memory_maps.initialized == 0 && get_memory_maps(object) != 0) {
+        LOG_WARNING("Failed to read memory map, cannot locate TrainingProgram region");
+        return -1;
+    }
+
+    region_size = object->driver_data->memory_maps.training_program.size;
+    if (region_size == 0) {
+        LOG_WARNING("Device did not report a TrainingProgram memory region");
+        return -1;
+    }
+
+    live = (uint8_t*)malloc(region_size);
+    if (live == NULL) {
+        LOG_ERROR("Could not allocate memory for training_program_read");
+        return -1;
+    }
+
+    if (libambit_pmem20_flash_read(&object->driver_data->pmem20, object->driver_data->memory_maps.training_program.start, region_size, live) != 0) {
+        LOG_ERROR("training_program_read: failed to read TrainingProgram region");
+        free(live);
+        return -1;
+    }
+
+    ret = ambit_training_program_decode(live, region_size, program);
+
+    free(live);
+
+    return ret;
 }
 
 /**

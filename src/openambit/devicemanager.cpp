@@ -288,6 +288,30 @@ void DeviceManager::writeSportModes(const QList<QVariantMap> &modes)
     emit sportModeWriteResult(res == 0);
 }
 
+void DeviceManager::writeTrainingProgram(const QVariantMap &planMap)
+{
+    mutex.lock();
+    if (deviceObject == NULL) {
+        mutex.unlock();
+        emit trainingProgramWriteResult(false, tr("No watch connected"));
+        return;
+    }
+
+    TrainingPlan plan(planMap);
+    ambit_training_program_t program;
+    QString error;
+    if (!TrainingPlanScheduler::buildNativeProgram(plan, program, error)) {
+        mutex.unlock();
+        emit trainingProgramWriteResult(false, error);
+        return;
+    }
+
+    int res = libambit_training_program_write(deviceObject, &program);
+    mutex.unlock();
+
+    emit trainingProgramWriteResult(res == 0, res == 0 ? QString() : tr("The watch rejected the write"));
+}
+
 void DeviceManager::logMovescountID(QString device, QDateTime time, QString moveID)
 {
     logStore.storeMovescountId(device, time, moveID);

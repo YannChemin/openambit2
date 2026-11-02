@@ -40,6 +40,7 @@ add_library (
   sport_mode_serialize.c
   custom_modes_bxml.c
   apps_directory.c
+  training_program.c
   ${HIDAPI_SOURCE_FILES}
 )
 
@@ -56,7 +57,7 @@ include_directories(
 )
 
 install(TARGETS ambit DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install(FILES libambit.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES libambit.h training_program.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 set(CMAKE_INSTALL_UDEVRULESDIR /etc/udev/rules.d
     CACHE PATH "Where to install udev rules")

@@ -79,6 +79,8 @@ ambit_device_driver_t ambit_device_driver_ambit = {
     flash_read,
     NULL, // flash_write - not yet implemented for legacy Ambit/Ambit2 (fixed offsets, would reuse libambit_pmem20_data_write_addr like flash_read does)
     NULL, // memory_map_get - fixed offsets, no discovery command on legacy Ambit/Ambit2
+    NULL, // training_program_write - legacy Ambit/Ambit2 has no TrainingProgram region concept
+    NULL, // training_program_read
 };
 
 /*

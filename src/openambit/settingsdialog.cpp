@@ -21,6 +21,7 @@
  */
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
+#include "i18n.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QFileInfo>
@@ -33,6 +34,12 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
+
+    // An empty value follows the desktop session language
+    ui->comboBoxLanguage->addItem(tr("System default"), QString());
+    ui->comboBoxLanguage->addItem("English", QString("en"));
+    for (const QString &lang : I18n::availableTranslations())
+        ui->comboBoxLanguage->addItem(I18n::nativeName(lang), lang);
 
     readSettings();
 
@@ -80,6 +87,7 @@ void SettingsDialog::readSettings()
     settings.beginGroup("generalSettings");
     ui->checkBoxSkipBetaCheck->setChecked(settings.value("skipBetaCheck", false).toBool());
     ui->checkBoxRunningBackground->setChecked(settings.value("runningBackground", true).toBool());
+    ui->comboBoxLanguage->setCurrentIndex(qMax(0, ui->comboBoxLanguage->findData(settings.value("language", "").toString())));
     settings.endGroup();
 
     settings.beginGroup("syncSettings");
@@ -110,6 +118,7 @@ void SettingsDialog::writeSettings()
     settings.beginGroup("generalSettings");
     settings.setValue("skipBetaCheck", ui->checkBoxSkipBetaCheck->isChecked());
     settings.setValue("runningBackground", ui->checkBoxRunningBackground->isChecked());
+    settings.setValue("language", ui->comboBoxLanguage->currentData().toString());
     settings.endGroup();
 
     settings.beginGroup("syncSettings");

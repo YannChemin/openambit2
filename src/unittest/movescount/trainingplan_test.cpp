@@ -28,10 +28,13 @@ static QVariantMap entry(const QString &date, const QVariantMap &workout)
 
 TEST_SUITE_BEGIN("TrainingPlan");
 
-TEST_CASE("dateToDays2000 is 0-based on 2000-01-01") {
-    CHECK(TrainingPlanScheduler::dateToDays2000("2000-01-01") == 0);
-    CHECK(TrainingPlanScheduler::dateToDays2000("2000-01-02") == 1);
-    CHECK(TrainingPlanScheduler::dateToDays2000("1999-12-31") == -1);
+TEST_CASE("dateToDays2000 matches real firmware: 2000-01-02 is day 0, not 2000-01-01") {
+    // Hardware-verified by sommet (commit b343442): the firmware counts days STRICTLY AFTER
+    // 2000-01-01, so 2000-01-02 = 0 (not 2000-01-01 = 0, which was this port's original,
+    // never-hardware-checked assumption).
+    CHECK(TrainingPlanScheduler::dateToDays2000("2000-01-01") == -1);
+    CHECK(TrainingPlanScheduler::dateToDays2000("2000-01-02") == 0);
+    CHECK(TrainingPlanScheduler::dateToDays2000("2000-01-03") == 1);
 }
 
 TEST_CASE("TrainingPlan/TrainingPlanEntry round-trip through toMap") {
@@ -137,6 +140,102 @@ TEST_CASE("packPlan fails cleanly on a plan with no entries") {
     QString error;
     QList<TrainingPlanPack> packs = TrainingPlanScheduler::packPlan(plan, error);
     CHECK(packs.isEmpty());
+    CHECK(!error.isEmpty());
+}
+
+TEST_CASE("buildNativeProgram sums expanded step durations/distances per entry") {
+    QVariantMap map;
+    map.insert(TrainingPlan::NAME, "Marathon prep");
+    // Entry 1: a repeat block (3 x 90s) + a plain 600s step = 3*90+600 = 870s -> 15 min (ceil).
+    QVariantMap repeatStart, interval, plainStep, repeatEnd;
+    {
+        QVariantMap type; type.insert(WorkoutStepType::TYPE_NAME, "repeatStart"); type.insert(WorkoutStepType::VALUE, 3);
+        repeatStart.insert(WorkoutStep::TYPE, type);
+    }
+    {
+        QVariantMap type; type.insert(WorkoutStepType::TYPE_NAME, "interval");
+        QVariantMap duration; duration.insert(WorkoutStepDuration::DURATION_NAME, "time"); duration.insert(WorkoutStepDuration::VALUE, 90);
+        interval.insert(WorkoutStep::TYPE, type);
+        interval.insert(WorkoutStep::DURATION, duration);
+    }
+    {
+        QVariantMap type; type.insert(WorkoutStepType::TYPE_NAME, "repeatEnd");
+        repeatEnd.insert(WorkoutStep::TYPE, type);
+    }
+    {
+        QVariantMap type; type.insert(WorkoutStepType::TYPE_NAME, "cooldown");
+        QVariantMap duration; duration.insert(WorkoutStepDuration::DURATION_NAME, "time"); duration.insert(WorkoutStepDuration::VALUE, 600);
+        plainStep.insert(WorkoutStep::TYPE, type);
+        plainStep.insert(WorkoutStep::DURATION, duration);
+    }
+    QVariantMap workout1;
+    workout1.insert(Workout::NAME, "Running");
+    workout1.insert(Workout::STEPS, QVariantList{repeatStart, interval, repeatEnd, plainStep});
+
+    QVariantMap e1;
+    e1.insert(TrainingPlanEntry::DATE, "2026-08-14");
+    e1.insert(TrainingPlanEntry::WORKOUT, workout1);
+
+    QVariantMap e2;
+    e2.insert(TrainingPlanEntry::DATE, "2026-08-20");
+    e2.insert(TrainingPlanEntry::WORKOUT, simpleWorkout("Cycling", 3600)); // 3600s -> 60 min
+
+    map.insert(TrainingPlan::ENTRIES, QVariantList{e1, e2});
+    TrainingPlan plan(map);
+
+    ambit_training_program_t program;
+    QString error;
+    REQUIRE(TrainingPlanScheduler::buildNativeProgram(plan, program, error) == true);
+    CHECK(error.isEmpty());
+
+    CHECK(program.base_year == 2026);
+    CHECK(program.base_month == 8);
+    CHECK(program.base_day == 14);
+    REQUIRE(program.items_count == 2);
+
+    CHECK(program.items[0].day_offset == 0);
+    CHECK(std::string(program.items[0].name) == "Running");
+    CHECK(program.items[0].duration_minutes == 15); // ceil(870/60)
+    CHECK(program.items[0].activity_id == 3); // resolved from "Running"
+
+    CHECK(program.items[1].day_offset == 6); // 2026-08-20 is 6 days after 2026-08-14
+    CHECK(std::string(program.items[1].name) == "Cycling");
+    CHECK(program.items[1].duration_minutes == 60);
+    CHECK(program.items[1].activity_id == 4); // resolved from "Cycling"
+}
+
+TEST_CASE("buildNativeProgram falls back to activityId 3 for an unrecognized workout name") {
+    QVariantMap map;
+    map.insert(TrainingPlan::ENTRIES, QVariantList{entry("2026-08-14", simpleWorkout("Something Exotic", 60))});
+    TrainingPlan plan(map);
+
+    ambit_training_program_t program;
+    QString error;
+    REQUIRE(TrainingPlanScheduler::buildNativeProgram(plan, program, error) == true);
+    REQUIRE(program.items_count == 1);
+    CHECK(program.items[0].activity_id == 3);
+}
+
+TEST_CASE("buildNativeProgram fails cleanly on a plan with no entries") {
+    TrainingPlan plan;
+    ambit_training_program_t program;
+    QString error;
+    CHECK(TrainingPlanScheduler::buildNativeProgram(plan, program, error) == false);
+    CHECK(!error.isEmpty());
+}
+
+TEST_CASE("buildNativeProgram fails cleanly on more entries than the firmware supports") {
+    QVariantMap map;
+    QVariantList entries;
+    for (int i = 0; i < TRAINING_PROGRAM_MAX_ITEMS + 1; i++) {
+        entries.append(entry(QString("2026-01-%1").arg(i % 28 + 1, 2, 10, QChar('0')), simpleWorkout("Running", 60)));
+    }
+    map.insert(TrainingPlan::ENTRIES, entries);
+    TrainingPlan plan(map);
+
+    ambit_training_program_t program;
+    QString error;
+    CHECK(TrainingPlanScheduler::buildNativeProgram(plan, program, error) == false);
     CHECK(!error.isEmpty());
 }
 

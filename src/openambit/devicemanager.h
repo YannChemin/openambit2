@@ -37,6 +37,7 @@
 #include <movescount/movescountxml.h>
 #include "udevlistener.h"
 #include <libambit.h>
+#include <movescount/trainingplan.h>
 
 class DeviceManager : public QObject
 {
@@ -52,10 +53,12 @@ signals:
     void syncFinished(bool success);
     void syncProgressInform(QString message, bool error, bool newRow, quint8 percentDone);
     void sportModeWriteResult(bool success);
+    void trainingProgramWriteResult(bool success, QString error);
 public slots:
     void detect(void);
     void startSync(bool readAllLogs);
     void writeSportModes(const QList<QVariantMap> &modes);
+    void writeTrainingProgram(const QVariantMap &planMap);
 
 private slots:
     void chargeTimerHit();

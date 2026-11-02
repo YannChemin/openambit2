@@ -267,6 +267,18 @@ void MainWindow::showTrainingPlanBuilder()
     TrainingPlanDialog *dialog = new TrainingPlanDialog(this);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setModal(false);
+
+    connect(dialog, &TrainingPlanDialog::writeToWatchRequested, this, [this](const QVariantMap &planMap) {
+        QMetaObject::invokeMethod(deviceManager, "writeTrainingProgram", Q_ARG(QVariantMap, planMap));
+    });
+    // Connected with `dialog` as context so this auto-disconnects when the dialog closes,
+    // instead of accumulating one connection per "Training Plan Builder..." open.
+    connect(deviceManager, &DeviceManager::trainingProgramWriteResult, dialog, [dialog](bool ok, QString error) {
+        QMessageBox::information(dialog, dialog->tr("Training Program"),
+            ok ? dialog->tr("Training program written to watch successfully.")
+               : dialog->tr("Failed to write training program: %1").arg(error));
+    });
+
     dialog->show();
 }
 

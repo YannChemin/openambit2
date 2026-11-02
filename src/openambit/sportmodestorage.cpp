@@ -1,4 +1,6 @@
 #include "sportmodestorage.h"
+#include "activitycategory.h"
+#include <QCoreApplication>
 #include <QFile>
 #include <QDir>
 #include <QJsonDocument>
@@ -110,4 +112,45 @@ QList<QVariantMap> SportModeStorage::factoryDefaults()
         makeMode("Horse Riding",    23,  18,   5,    5,    0,  false, false, false, false, false, 0),
         makeMode("Other",           0,   19,   30,   30,   0,  false, false, false, false, false, 0),
     };
+}
+
+QList<QVariantMap> SportModeStorage::airSportPresets()
+{
+    // Flying needs a dense track: 1 s GPS fixes and recording catch thermal
+    // circles, and the pressure altimeter is locked in "Altitude" mode (1)
+    // because FusedAlti would read climbs and descents as weather changes.
+    // Paragliding (92) is the only flying activity the firmware knows; the
+    // other wings reuse it, aircraft use "Unspecified sport" (1) and are
+    // recognised as air sports by their name. Names fit the watch's 15
+    // characters; translations must too, and are cut otherwise.
+    struct Preset {
+        const char *name;
+        int activityId;
+        int gpsInterval;
+        int recordingInterval;
+        bool hrBelt;
+    };
+    static const Preset presets[] = {
+        //                                                        name              activity                                   gps rec hrBelt
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Paragliding"),    ActivityCategory::ACTIVITY_PARAGLIDING, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Hang Gliding"),   ActivityCategory::ACTIVITY_PARAGLIDING, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Speed Flying"),   ActivityCategory::ACTIVITY_PARAGLIDING, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Paramotor"),      ActivityCategory::ACTIVITY_PARAGLIDING, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Gliding"),        ActivityCategory::ACTIVITY_PARAGLIDING, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Microlight ULM"), ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Gyrocopter"),     ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Powered Flight"), ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Helicopter"),     ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Balloon"),        ActivityCategory::ACTIVITY_UNSPECIFIED, 5, 5, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Skydiving"),      ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+        { QT_TRANSLATE_NOOP("SportModeStorage", "Wingsuit"),       ActivityCategory::ACTIVITY_UNSPECIFIED, 1, 1, false },
+    };
+
+    QList<QVariantMap> result;
+    for (const Preset &p : presets) {
+        QString name = QCoreApplication::translate("SportModeStorage", p.name).left(15);
+        result << makeMode(name, p.activityId, 0, p.gpsInterval, p.recordingInterval,
+                           1, p.hrBelt, false, false, false, false, 0);
+    }
+    return result;
 }

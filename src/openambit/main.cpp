@@ -22,16 +22,13 @@
 #include <unistd.h>
 #include "mainwindow.h"
 #include <QSettings>
-#include <QTranslator>
-#include <QLibraryInfo>
 #include <QStyleFactory>
 #include <QPalette>
 #include <QProcess>
 
+#include "i18n.h"
 #include "single_application.h"
 #include "signalhandler.h"
-
-static void initTranslations(void);
 
 static bool isGnomeDarkMode()
 {
@@ -111,17 +108,19 @@ int main(int argc, char *argv[])
 
     applySystemTheme(a);
 
-    // Handle forced localisation / translation
+    // Handle forced localisation / translation ("-locale:fr_FR")
+    QString forcedLocale;
     Q_FOREACH(QString argu, a.arguments()) {
-        const static QString localeParam = "-locale:";
+        const QString localeParam = QStringLiteral("-locale:");
         if (argu.startsWith(localeParam)) {
-           QLocale::setDefault(QLocale(argu.mid(sizeof(localeParam))));
+           forcedLocale = argu.mid(localeParam.length());
            break;
         }
     }
 
-    // Initialize translations
-    initTranslations();
+    // Initialize translations from the forced locale, the settings or the
+    // environment (LANGUAGE, LC_ALL, LC_MESSAGES, LANG)
+    I18n::install(forcedLocale);
 
     MainWindow w;
 
@@ -135,26 +134,4 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
-}
-
-static void initTranslations(void)
-{
-    QLocale locale;
-    QTranslator *qtTranslator = new QTranslator();
-    qtTranslator->load("qt_" + locale.name(), QLibraryInfo::location(QLibraryInfo::TranslationsPath));
-    if (qtTranslator->isEmpty()) {
-        delete qtTranslator;
-    }
-    else {
-        qApp->installTranslator(qtTranslator);
-    }
-
-    QTranslator *openambitTranslator = new QTranslator();
-    openambitTranslator->load(":/translations/openambit_" + locale.name());
-    if (openambitTranslator->isEmpty()) {
-        delete openambitTranslator;
-    }
-    else {
-        qApp->installTranslator(openambitTranslator);
-    }
 }

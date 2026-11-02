@@ -48,7 +48,18 @@ class TrainingPlanDialog : public QDialog
 public:
     explicit TrainingPlanDialog(QWidget *parent = nullptr);
 
+signals:
+    /**
+     * Emitted when the user asks to write the current plan to the watch via the native
+     * TrainingProgram path (see trainingplan.h's own header comment for what that means and
+     * its limitations vs. the App Zone path). \a planMap is a Workout/TrainingPlan-schema
+     * QVariantMap (TrainingPlan::toMap()), already validated offline (buildNativeProgram()
+     * succeeded on it) - the receiver still gets to fail the actual watch write.
+     */
+    void writeToWatchRequested(const QVariantMap &planMap);
+
 private slots:
+    void onWriteToWatchNative();
     void onNewPlan();
     void onLoadPlan();
     void onSavePlan();
@@ -114,6 +125,7 @@ private:
     QCheckBox      *m_notifyBeep;
     QCheckBox      *m_notifyLight;
 
+    QPushButton    *m_writeNativeBtn;
     QPushButton    *m_packBtn;
     QListWidget    *m_packList;
     QPlainTextEdit *m_sourceView;

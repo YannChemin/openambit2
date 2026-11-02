@@ -364,6 +364,34 @@ int libambit_flash_write(ambit_object_t *object, uint32_t address, const uint8_t
     return ret;
 }
 
+int libambit_training_program_write(ambit_object_t *object, const ambit_training_program_t *program)
+{
+    int ret = -1;
+
+    if (object->driver != NULL && object->driver->training_program_write != NULL) {
+        ret = object->driver->training_program_write(object, program);
+    }
+    else {
+        LOG_WARNING("Driver does not support training_program_write");
+    }
+
+    return ret;
+}
+
+int libambit_training_program_read(ambit_object_t *object, ambit_training_program_t *program)
+{
+    int ret = -1;
+
+    if (object->driver != NULL && object->driver->training_program_read != NULL) {
+        ret = object->driver->training_program_read(object, program);
+    }
+    else {
+        LOG_WARNING("Driver does not support training_program_read");
+    }
+
+    return ret;
+}
+
 int libambit_memory_map_get(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions)
 {
     int ret = -1;

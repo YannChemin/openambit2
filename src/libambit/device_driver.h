@@ -46,6 +46,8 @@ typedef struct ambit_device_driver_s {
     int (*flash_read)(ambit_object_t *object, uint32_t address, uint32_t length, uint8_t *buffer);
     int (*flash_write)(ambit_object_t *object, uint32_t address, const uint8_t *data, uint32_t length, bool include_sha256_hash);
     int (*memory_map_get)(ambit_object_t *object, ambit_memory_region_t *regions, int max_regions);
+    int (*training_program_write)(ambit_object_t *object, const ambit_training_program_t *program);
+    int (*training_program_read)(ambit_object_t *object, ambit_training_program_t *program);
 } ambit_device_driver_t;
 
 extern ambit_device_driver_t ambit_device_driver_ambit;  // Ambit & Ambit2
